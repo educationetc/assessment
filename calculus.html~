@@ -1,0 +1,23 @@
+<head>
+  <title>Calculus</title>
+</head>
+
+<body>
+
+  {{> hello}}
+
+<img src="cb1969ab3.png" alt="first calculus problem!"/>
+<form>
+  <input type="radio" name="multiple_choice" value="A">A
+  <input type="radio" name="multiple_choice" value="B">B
+  <input type="radio" name="multiple_choice" value="C">C
+  <input type="radio" name="multiple_choice" value="D">D
+  <input type="radio" name="multiple_choice" value="E">E
+  <input type="submit" value="Submit">
+</form>
+</body>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
