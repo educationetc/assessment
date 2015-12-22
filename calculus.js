@@ -8,6 +8,13 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.body.events({  
+      'click :button': function(event, template) {
+    var element = template.find('input:radio[name=multiple_choice]:checked');
+    console.log($(element).val());
+  }
+});
+
   Template.hello.events({
     'click button': function () {
       // increment the counter when button is clicked
