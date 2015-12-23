@@ -1,3 +1,5 @@
+Multiple_Choice_Questions = new Mongo.Collection("mc_questions");
+
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
@@ -11,7 +13,12 @@ if (Meteor.isClient) {
   Template.body.events({  
       'click :button': function(event, template) {
     var element = template.find('input:radio[name=multiple_choice]:checked');
+//  if element.length() == 0, haven't clicked anything.  submit should remain
+//  greyed out until something is chosen.
     console.log($(element).val());
+//  compare chosen value to correct answer and move to next problem.
+//  have graphics of three problems with corresponding answer.
+
   }
 });
 
