@@ -1,13 +1,23 @@
-Multiple_Choice_Questions = new Mongo.Collection("mc_questions");
+
 
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
-
+  alert('one step before question container assignment');
+  $('#question_container').html('<img src="cb1969ab3.png"/>');
+  alert('one step after question container');
   Template.hello.helpers({
     counter: function () {
       return Session.get('counter');
     }
+  });
+
+Template.body.helpers({
+    questions: [
+      { filename: "cb1969ab3.png" },
+      { filename: "cb1969ab3.png" },
+      { filename: "cb1969ab3.png" }
+    ]
   });
 
   Template.body.events({  
@@ -16,6 +26,7 @@ if (Meteor.isClient) {
 //  if element.length() == 0, haven't clicked anything.  submit should remain
 //  greyed out until something is chosen.
     console.log($(element).val());
+    $('#question_container').html('<img src="cb1969ab3.png"/>');
 //  compare chosen value to correct answer and move to next problem.
 //  have graphics of three problems with corresponding answer.
 
