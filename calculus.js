@@ -5,6 +5,7 @@
   ];  
 
   var question_number = 0;
+  var number_correct = 0;
 
 if (Meteor.isClient) {
   // counter starts at 0
@@ -22,11 +23,12 @@ if (Meteor.isClient) {
 //  if element.length() == 0, haven't clicked anything.  submit should remain
 //  greyed out until something is chosen.
 //  now need to add something which compares $(element).val() with questions[question_number].answer, and increments number_correct.  number_correct needs to be a session variable so we can auto-update the display?
+    if ($(element).val() == questions[question_number].answer) {number_correct = number_correct + 1;}  
     console.log($(element).val());
+    console.log(number_correct);	  
     question_number = question_number + 1;	  
     $('#question_container').html('<img src=' + questions[question_number].filename +'/>');
-//  compare chosen value to correct answer and move to next problem.
-//  have graphics of three problems with corresponding answer.
+
 
   }
 });
