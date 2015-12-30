@@ -21,8 +21,9 @@ if (Meteor.isClient) {
     var element = template.find('input:radio[name=multiple_choice]:checked');
 //  if element.length() == 0, haven't clicked anything.  submit should remain
 //  greyed out until something is chosen.
+//  now need to add something which compares $(element).val() with questions[question_number].answer, and increments number_correct.  number_correct needs to be a session variable so we can auto-update the display?
     console.log($(element).val());
-    question_number = question_number+1;	  
+    question_number = question_number + 1;	  
     $('#question_container').html('<img src=' + questions[question_number].filename +'/>');
 //  compare chosen value to correct answer and move to next problem.
 //  have graphics of three problems with corresponding answer.
