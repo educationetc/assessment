@@ -11,6 +11,12 @@ if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
 
+// generic function to retrieve any session variable
+// {{session 'foo'}} to use in html the value of session variable foo.
+  Template.registerHelper('session',function(input){
+    return Session.get(input);
+  });  
+
   Template.hello.helpers({
     counter: function () {
       return Session.get('counter');
@@ -20,13 +26,14 @@ if (Meteor.isClient) {
   Template.body.events({  
       'click :button': function(event, template) {
     var element = template.find('input:radio[name=multiple_choice]:checked');
-//  if element.length() == 0, haven't clicked anything.  submit should remain
+//  if element.length() === 0, haven't clicked anything.  submit should remain
 //  greyed out until something is chosen.
 //  now need to add something which compares $(element).val() with questions[question_number].answer, and increments number_correct.  number_correct needs to be a session variable so we can auto-update the display?
-    if ($(element).val() == questions[question_number].answer) {number_correct = number_correct + 1;}  
+    if ($(element).val() === questions[question_number].answer) {number_correct += 1;}  
     console.log($(element).val());
     console.log(number_correct);	  
-    question_number = question_number + 1;	  
+    $('input[name="multiple_choice"]').prop('checked', false);
+    question_number += 1;	  
     $('#question_container').html('<img src=' + questions[question_number].filename +'/>');
 
 
