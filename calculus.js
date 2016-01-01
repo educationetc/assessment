@@ -10,7 +10,7 @@
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
-
+  Session.setDefault('number_correct',0);
 // generic function to retrieve any session variable
 // {{session 'foo'}} to use in html the value of session variable foo.
   Template.registerHelper('session',function(input){
@@ -30,8 +30,7 @@ if (Meteor.isClient) {
 //  greyed out until something is chosen.
 //  now need to add something which compares $(element).val() with questions[question_number].answer, and increments number_correct.  number_correct needs to be a session variable so we can auto-update the display?
     if ($(element).val() === questions[question_number].answer) {number_correct += 1;}  
-    console.log($(element).val());
-    console.log(number_correct);	  
+    Session.set('number_correct',number_correct);	  
     $('input[name="multiple_choice"]').prop('checked', false);
     question_number += 1;	  
     $('#question_container').html('<img src=' + questions[question_number].filename +'/>');
