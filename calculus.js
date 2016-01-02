@@ -7,7 +7,7 @@ var questions = [
 var question_number = 0;
 var number_correct = 0;
 
-var clock = 10;
+var clock = 420;
 var timeLeft = function() {
   if (clock > 0) {
     clock--;
