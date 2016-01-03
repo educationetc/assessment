@@ -1,20 +1,27 @@
 var questions = [
       {filename: '"cb1969ab3.png"', answer: "B",category: 11},
       {filename: '"cb1969ab7.png"', answer: "D",category: 21},
-      {filename: '"cb1969ab9.png"', answer: "C",category: 24}
+      {filename: '"cb1969ab9.png"', answer: "C",category: 24},
+      {filename: '"cb1969ab14.png"', answer: "E",category: 19},
+      {filename: '"cb1969ab22.png"', answer: "E",category: 20},
+      {filename: '"cb1969ab23.png"', answer: "C",category: 37},
+      {filename: '"cb1969ab29.png"', answer: "A",category: 30},
+      {filename: '"cb1969ab30.png"', answer: "E",category: 22},
+      {filename: '"cb1969ab37.png"', answer: "D",category: 43},
+      {filename: '"cb1969ab38.png"', answer: "C",category: 30},
+      {filename: '"cb1969ab43.png"', answer: "D",category: 30},
+      {filename: '"cb1969ab45.png"', answer: "D",category: 22}
 ];  
 
 var question_number = 0;
 var number_correct = 0;
 
-var clock = 420;
+var clock = 1800;
 var timeLeft = function() {
   if (clock > 0) {
     clock--;
-    Session.set("time", clock);
-    return console.log(clock);
+    return Session.set("time", clock);
   } else {
-    console.log("That's All Folks");
     return Meteor.clearInterval(interval);
   }
 };
