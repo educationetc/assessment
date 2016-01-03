@@ -17,9 +17,12 @@ var question_number = 0;
 var number_correct = 0;
 
 var clock = 1800;
+
 var timeLeft = function() {
   if (clock > 0) {
     clock--;
+    Session.set('display_minutes',("0" + Math.floor(clock/60)).slice(-2));
+    Session.set('display_seconds',("0" + clock % 60).slice(-2));  
     return Session.set("time", clock);
   } else {
     return Meteor.clearInterval(interval);
