@@ -3,18 +3,8 @@
 </head>
 
 <body>
+{{> Template.dynamic template="assessment_phase"}}
 
-
-<form>
-  <input type="radio" name="multiple_choice" value="A">A
-  <input type="radio" name="multiple_choice" value="B">B
-  <input type="radio" name="multiple_choice" value="C">C
-  <input type="radio" name="multiple_choice" value="D">D
-  <input type="radio" name="multiple_choice" value="E">E
-  <input type="button" value="Submit">
-  <span id='time' >Time:   {{session "display_minutes"}}:{{session "display_seconds"}} </span>
-  <span id='score'>Score:  {{session "number_correct"}}</span>
-</form>
 <div id="question_container">
 <img src="cb1969ab3.png" alt="first calculus problem!"/>
 </div>
@@ -25,4 +15,19 @@
   <button>Click Me</button>
   <p>You've pressed the button {{counter}} times.</p>
 </template>
+<template name="assessment_phase">
+<form>
+  <input type="radio" name="multiple_choice" value="A">A
+  <input type="radio" name="multiple_choice" value="B">B
+  <input type="radio" name="multiple_choice" value="C">C
+  <input type="radio" name="multiple_choice" value="D">D
+  <input type="radio" name="multiple_choice" value="E">E
+  <input type="button" value="Submit">
+  <span id='time' >Time:   {{session "display_minutes"}}:{{session "display_seconds"}} </span>
+  <span id='score'>Score:  {{session "number_correct"}}</span>
+</form>
+</template>
 
+<template name="feedback_phase">
+
+</template>
