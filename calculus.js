@@ -16,7 +16,7 @@ var questions = [
 var question_number = 0;
 var number_correct = 0;
 
-var clock = 1800;
+var clock = 10;
 
 var timeLeft = function() {
   if (clock > 0) {
@@ -37,17 +37,15 @@ if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
   Session.setDefault('number_correct',0);
+  Session.setDefault('which_phase','assessment_phase');
 // generic function to retrieve any session variable
 // {{session 'foo'}} to use in html the value of session variable foo.
   Template.registerHelper('session',function(input){
     return Session.get(input);
   });  
-
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
-  });
+  Template.registerHelper('whichPhase',function(){
+  return Session.get('which_phase');
+});  
 
   Template.body.events({  
       'click :button': function(event, template) {
@@ -64,12 +62,6 @@ if (Meteor.isClient) {
   }
 });
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
 }
 
 if (Meteor.isServer) {

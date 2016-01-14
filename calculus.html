@@ -3,18 +3,12 @@
 </head>
 
 <body>
-{{> Template.dynamic template="feedback_phase"}}
+{{> Template.dynamic template=whichPhase }}
 
 <div id="question_container">
 <img src="cb1969ab3.png" alt="first calculus problem!"/>
 </div>
 </body>
-
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
 <template name="assessment_phase">
 <form>
   <input type="radio" name="multiple_choice" value="A">A
@@ -30,8 +24,9 @@
 
 <template name="feedback_phase">
 <form>
-<textarea name="summary" id="summary" placeholder="What did you learn?">
-whad'ja learn?
-</textarea>
+<textarea name="summary" id="summary" placeholder="What did you learn?"></textarea>
 </form>
+</template>
+<template name="start_phase">
+press start to begin.
 </template>
