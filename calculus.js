@@ -16,8 +16,7 @@ var questions = [
 var question_number = 0;
 var number_correct = 0;
 
-var clock = 10;
-
+var clock = 20;
 var timeLeft = function() {
   if (clock > 0) {
     clock--;
@@ -26,6 +25,9 @@ var timeLeft = function() {
     Session.set('display_seconds',("0" + clock % 60).slice(-2));  
     return Session.set("time", clock);
   } else {
+// change phases because time came down to 0.
+    Session.set('which_phase','feedback_phase');
+    clock = 30;  
     return Meteor.clearInterval(interval);
   }
 };
@@ -43,6 +45,7 @@ if (Meteor.isClient) {
   Template.registerHelper('session',function(input){
     return Session.get(input);
   });  
+// stupid function because you can't use the session function in some cases.
   Template.registerHelper('whichPhase',function(){
   return Session.get('which_phase');
 });  
