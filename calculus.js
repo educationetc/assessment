@@ -15,25 +15,30 @@ var questions = [
 
 var question_number = 0;
 var number_correct = 0;
+var assessment_interval = 18;
+var feedback_interval = 9;
+var clock = assessment_interval + feedback_interval;
 
-var clock = 20;
 var timeLeft = function() {
-  if (clock > 0) {
-    clock--;
+  if (clock > feedback_interval) {
+  // assessment phase
     // the slice pads the display with a zero when necessary.
     Session.set('display_minutes',("0" + Math.floor(clock/60)).slice(-2));
     Session.set('display_seconds',("0" + clock % 60).slice(-2));  
+    clock--;
     return Session.set("time", clock);
+  } else if (clock > 0) {
+  // feedback phase
+    clock--;
+    Session.set('display_minutes',("0" + Math.floor(clock/60)).slice(-2));
+    Session.set('display_seconds',("0" + clock % 60).slice(-2));  
+    return Session.set('which_phase','feedback_phase');
   } else {
-// change phases because time came down to 0.
-    Session.set('which_phase','feedback_phase');
-    clock = 30;  
     return Meteor.clearInterval(interval);
   }
+
 };
 var interval = Meteor.setInterval(timeLeft, 1000);
-
-
 
 if (Meteor.isClient) {
   // counter starts at 0

@@ -24,7 +24,7 @@
 
 <template name="feedback_phase">
 <form>
-<textarea name="summary" id="summary" placeholder="What did you learn?"></textarea>
+<textarea name="summary" id="summary" placeholder="What did you learn?" ></textarea><span id='time' >Time:   {{session "display_minutes"}}:{{session "display_seconds"}} </span>
 </form>
 </template>
 <template name="start_phase">
