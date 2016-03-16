@@ -1,5 +1,5 @@
 <head>
-  <title>AP Calculus practice</title>
+  <title>AP Calculus Practice</title>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
   <input type="radio" name="multiple_choice" value="C">C
   <input type="radio" name="multiple_choice" value="D">D
   <input type="radio" name="multiple_choice" value="E">E
-  <input type="button" value="Submit">
+  <input type="button" value="Next">
   <span id='time' >Time:   {{session "display_minutes"}}:{{session "display_seconds"}} </span>
   <span id='score'>Score:  {{session "number_correct"}}</span>
 </form>
@@ -24,7 +24,7 @@
 
 <template name="feedback_phase">
 <form>
-<textarea name="summary" id="summary" placeholder="What did you learn?" ></textarea><span id='time' >Time:   {{session "display_minutes"}}:{{session "display_seconds"}} </span>
+<textarea name="summary" id="summary" placeholder="What did you learn?" ></textarea><span id='time' >   <input type="button" value="Next"> Time:   {{session "display_minutes"}}:{{session "display_seconds"}} </span>
 </form>
 </template>
 <template name="start_phase">
