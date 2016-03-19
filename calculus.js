@@ -65,8 +65,9 @@ if (Meteor.isClient) {
     Session.set('number_correct',number_correct);	  
     $('input[name="multiple_choice"]').prop('checked', false);
     question_number += 1;	  
-    var suffix = "soln";	  
-    $('#question_container').html('<img src=' + questions[question_number].filename + suffix + '/>');  	  
+    Session.set('filename',"filename");
+    suffix = "soln";	  
+    $('#question_container').html('<img src=' + questions[question_number].filename + "soln" + '/>');  	  
 
   }
 });
