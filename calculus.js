@@ -67,6 +67,7 @@ if (Meteor.isClient) {
     $('input[name="multiple_choice"]').prop('checked', false);
     question_number += 1;	  
     Session.set('filename',"filenameplussolution")
+    Session.set('filename','<img src=' + questions[question_number].filename + "soln" + '/>'	  
     $('#question_container').html('<img src=' + questions[question_number].filename + "soln" + '/>');  	  
 
   }
