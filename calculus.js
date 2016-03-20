@@ -45,7 +45,7 @@ if (Meteor.isClient) {
   Session.setDefault('counter', 0);
   Session.setDefault('number_correct',0);
   Session.setDefault('which_phase','assessment_phase');
-  Session.setDefault('filename','filename');
+  Session.setDefault('suffix','soln');
 // generic function to retrieve any session variable
 // {{session 'foo'}} to use in html the value of session variable foo.
   Template.registerHelper('session',function(input){
@@ -66,8 +66,7 @@ if (Meteor.isClient) {
     Session.set('number_correct',number_correct);	  
     $('input[name="multiple_choice"]').prop('checked', false);
     question_number += 1;	  
-    Session.set('filename',"filename");
-    suffix = "soln";	  
+    Session.set('filename',"filenameplussolution")
     $('#question_container').html('<img src=' + questions[question_number].filename + "soln" + '/>');  	  
 
   }
