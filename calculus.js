@@ -1,5 +1,5 @@
 var questions = [
-      {filename: '"cb1969ab3.png"', answer: "B",category: 11, solution: "cb1969ab3soln.png"},
+      {filename: '"cb1969ab3.png"', answer: "B",category: 11},
       {filename: '"cb1969ab7.png"', answer: "D",category: 21},
       {filename: '"cb1969ab9.png"', answer: "C",category: 24},
       {filename: '"cb1969ab14.png"', answer: "E",category: 19},
@@ -16,7 +16,7 @@ var questions = [
 var question_number = 0;
 var number_correct = 0;
 var assessment_interval = 28;
-var feedback_interval = 19;
+var feedback_interval = 12;
 var clock = assessment_interval + feedback_interval + 1;
 
 var timeLeft = function() {
@@ -66,7 +66,7 @@ if (Meteor.isClient) {
     Session.set('number_correct',number_correct);	  
     $('input[name="multiple_choice"]').prop('checked', false);
     question_number += 1;	  
-    Session.set('filename','<img src=' + questions[question_number].filename + "soln" + '/>');	  
+    Session.set('filename','<img src=' + questions[question_number].filename + 'soln' + '/>');	  
     $('#question_container').html('<img src=' + questions[question_number].filename + "soln" + '/>');  	  
 
   }
