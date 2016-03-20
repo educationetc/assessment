@@ -15,8 +15,8 @@ var questions = [
 
 var question_number = 0;
 var number_correct = 0;
-var assessment_interval = 18;
-var feedback_interval = 9;
+var assessment_interval = 28;
+var feedback_interval = 19;
 var clock = assessment_interval + feedback_interval + 1;
 
 var timeLeft = function() {
