@@ -45,7 +45,7 @@ if (Meteor.isClient) {
   Session.setDefault('counter', 0);
   Session.setDefault('number_correct',0);
   Session.setDefault('which_phase','assessment_phase');
-  Session.setDefault('suffix','soln');
+  Session.setDefault('filename','soln or not');
 // generic function to retrieve any session variable
 // {{session 'foo'}} to use in html the value of session variable foo.
   Template.registerHelper('session',function(input){
