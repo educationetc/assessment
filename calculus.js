@@ -32,6 +32,7 @@ var timeLeft = function() {
     clock--;
     Session.set('display_minutes',("0" + Math.floor(clock/60)).slice(-2));
     Session.set('display_seconds',("0" + clock % 60).slice(-2));  
+    Session.set('suffix','soln');  
     return Session.set('which_phase','feedback_phase');
   } else {
     return Meteor.clearInterval(interval);
@@ -45,7 +46,8 @@ if (Meteor.isClient) {
   Session.setDefault('counter', 0);
   Session.setDefault('number_correct',0);
   Session.setDefault('which_phase','assessment_phase');
-  Session.setDefault('filename','soln or not');
+  Session.setDefault('filename','"cb1969ab3.png"');
+  Session.setDefault('suffix','');
 // generic function to retrieve any session variable
 // {{session 'foo'}} to use in html the value of session variable foo.
   Template.registerHelper('session',function(input){
@@ -66,7 +68,7 @@ if (Meteor.isClient) {
     Session.set('number_correct',number_correct);	  
     $('input[name="multiple_choice"]').prop('checked', false);
     question_number += 1;	  
-    Session.set('filename','<img src=' + questions[question_number].filename.slice(0,-5) + 'soln' + '.png"/>');	  
+    Session.set('filename','<img src=' + questions[question_number].filename.slice(0,-5) + Session.get('suffix') + '.png"/>');	  
     $('#question_container').html(Session.get('filename'));  	  
 
   }
