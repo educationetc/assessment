@@ -29,6 +29,12 @@ var timeLeft = function() {
     return Session.set("time", clock);
   } else if (clock > 0) {
   // feedback phase
+    if (clock === feedback_interval){
+	Session.set('suffix','soln');
+	question_number = 0;
+	Session.set('filename','<img src=' + questions[question_number].filename.slice(0,-5) + Session.get('suffix') + '.png"/>');	  
+	$('#question_container').html(Session.get('filename'));  	  
+    }  
     clock--;
     Session.set('display_minutes',("0" + Math.floor(clock/60)).slice(-2));
     Session.set('display_seconds',("0" + clock % 60).slice(-2));  

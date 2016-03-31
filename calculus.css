@@ -1,1 +1,5 @@
 /* CSS declarations go here */
+#question_container{
+    width: 800px;
+    height: 450px; 
+}
