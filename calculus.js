@@ -41,6 +41,11 @@ var timeLeft = function() {
     Session.set('suffix','soln');  
     return Session.set('which_phase','feedback_phase');
   } else {
+    Meteor.call('sendEmail',
+            'postmaster@sandboxf8806a27e1324167a14b02281f6647b3.mailgun.org',
+            'scottstornetta@gmail.com',
+            'Hello from Meteor!',
+            'This is a test of Email.send invoked from the client.');
     return Meteor.clearInterval(interval);
   }
 
