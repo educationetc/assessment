@@ -87,11 +87,28 @@ if (Meteor.isServer) {
       process.env.MAIL_URL = "smtp://postmaster%40sandboxf8806a27e1324167a14b02281f6647b3.mailgun.org:49f4e4c0a4f2de3ea09c53d6cab67f86@smtp.mailgun.org:587";
 
   Email.send({
-    to: "sstornet@somsd.k12.nj.us",
+    to: "scottstornetta@gmail.com",
     from: "postmaster@sandboxf8806a27e1324167a14b02281f6647b3.mailgun.org",
     subject:"Example Email",
     html: "<p><strong>This will render as bold text</strong>, but this will not.</p>"
 });
     // code to run on server at startup
   });
+
+Meteor.methods({
+  sendEmail: function (to, from, subject, text) {
+    check([to, from, subject, text], [String]);
+
+    // Let other method calls from the same client start running,
+    // without waiting for the email sending to complete.
+    this.unblock();
+
+    Email.send({
+      to: to,
+      from: from,
+      subject: subject,
+      text: text
+    });
+  }
+});
 }
