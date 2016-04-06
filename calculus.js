@@ -15,8 +15,8 @@ var questions = [
 
 var question_number = 0;
 var number_correct = 0;
-var assessment_interval = 28;
-var feedback_interval = 12;
+var assessment_interval = 240;
+var feedback_interval = 120;
 var clock = assessment_interval + feedback_interval + 1;
 
 var timeLeft = function() {
@@ -45,7 +45,7 @@ var timeLeft = function() {
     Meteor.call('sendEmail',
             'scottstornetta@gmail.com',
             'postmaster@sandboxf8806a27e1324167a14b02281f6647b3.mailgun.org',
-	    'Homework results',
+	    'Homework results April 6, 2016',
             Session.get('summary'));
     return Meteor.clearInterval(interval);
   }
