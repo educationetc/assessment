@@ -45,8 +45,8 @@ var timeLeft = function() {
     Meteor.call('sendEmail',
             'scottstornetta@gmail.com',
             'postmaster@sandboxf8806a27e1324167a14b02281f6647b3.mailgun.org',
-            Session.get('summary'),
-            'This is a test of Email.send invoked from the client.');
+	    'Homework results',
+            Session.get('summary'));
     return Meteor.clearInterval(interval);
   }
 
@@ -92,12 +92,6 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
       process.env.MAIL_URL = "smtp://postmaster%40sandboxf8806a27e1324167a14b02281f6647b3.mailgun.org:49f4e4c0a4f2de3ea09c53d6cab67f86@smtp.mailgun.org:587";
-
-  Email.send({
-    to: "scottstornetta@gmail.com",
-    from: "postmaster@sandboxf8806a27e1324167a14b02281f6647b3.mailgun.org",
-    subject:"Example Email",
-    html: "<p><strong>This will render as bold text</strong>, but this will not.</p>"
 });
     // code to run on server at startup
   });
