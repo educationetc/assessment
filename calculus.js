@@ -41,10 +41,11 @@ var timeLeft = function() {
     Session.set('suffix','soln');  
     return Session.set('which_phase','feedback_phase');
   } else {
+      
     Meteor.call('sendEmail',
-            'postmaster@sandboxf8806a27e1324167a14b02281f6647b3.mailgun.org',
             'scottstornetta@gmail.com',
-            'Hello from Meteor!',
+            'postmaster@sandboxf8806a27e1324167a14b02281f6647b3.mailgun.org',
+            Session.get('summary'),
             'This is a test of Email.send invoked from the client.');
     return Meteor.clearInterval(interval);
   }
@@ -59,6 +60,7 @@ if (Meteor.isClient) {
   Session.setDefault('which_phase','assessment_phase');
   Session.setDefault('filename','"cb1969ab3.png"');
   Session.setDefault('suffix','');
+  Session.setDefault('summary','Enter your name and what you learned.');
 // generic function to retrieve any session variable
 // {{session 'foo'}} to use in html the value of session variable foo.
   Template.registerHelper('session',function(input){
