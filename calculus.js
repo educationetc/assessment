@@ -10,13 +10,26 @@ var questions = [
       {filename: '"cb1969ab37.png"', answer: "D",category: 43},
       {filename: '"cb1969ab38.png"', answer: "C",category: 30},
       {filename: '"cb1969ab43.png"', answer: "D",category: 30},
-      {filename: '"cb1969ab45.png"', answer: "D",category: 22}
+      {filename: '"cb1969ab45.png"', answer: "D",category: 22},
+
+      {filename: '"cb1988bc1.png"', answer: "A",category: 37},
+      {filename: '"cb1988bc2.png"', answer: "D",category: 30},
+      {filename: '"cb1988bc3.png"', answer: "B",category: 22},
+      {filename: '"cb1988bc4.png"', answer: "E",category: 15},
+      {filename: '"cb1988bc5.png"', answer: "C",category: 11},
+      {filename: '"cb1988bc6.png"', answer: "C",category: 18},
+      {filename: '"cb1988bc7.png"', answer: "A",category: 41},
+      {filename: '"cb1988bc8.png"', answer: "A",category: 20},
+      {filename: '"cb1988bc29.png"', answer: "B",category: 38},
+      {filename: '"cb1988bc30.png"', answer: "C",category: 42},
+      {filename: '"cb1988bc31.png"', answer: "C",category: 31},
+      {filename: '"cb1988bc32.png"', answer: "E",category: 33}
 ];  
 
-var question_number = 0;
+var question_number = 12;
 var number_correct = 0;
-var assessment_interval = 240;
-var feedback_interval = 120;
+var assessment_interval = 28*60;
+var feedback_interval = 12*60;
 var clock = assessment_interval + feedback_interval + 1;
 
 var timeLeft = function() {
