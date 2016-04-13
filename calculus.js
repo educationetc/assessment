@@ -44,7 +44,7 @@ var timeLeft = function() {
   // feedback phase
     if (clock === feedback_interval){
 	Session.set('suffix','soln');
-	question_number = 0;
+	question_number = 12;
 	Session.set('filename','<img src=' + questions[question_number].filename.slice(0,-5) + Session.get('suffix') + '.png"/>');	  
 	$('#question_container').html(Session.get('filename'));  	  
     }  
