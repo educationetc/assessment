@@ -20,45 +20,39 @@ function generateId(int) {
 * ===============================
 */
 
-FlowRouter.route('/', {
-  action: function() {
+Router.route('/', function() {
     BlazeLayout.render("app", {content: "home"});
-  }
 });
 
 // create exam page
-FlowRouter.route('/create', {
-  action: function() {
+Router.route('/create', function() {
     BlazeLayout.render("app", {content: "create"});
-  }
 });
 
 // take exam page
-FlowRouter.route('/assessment/:token/:admin', {
-	action: function(params, queryParams) {
-		var test = Tests.find({token: params.token}).fetch();
+Router.route('/assessment/:token', function() {
+	var test = Tests.find({token: this.params.token}).fetch();
 
-		if(test[0] === undefined)
-			return BlazeLayout.render('app', {content: '404'});
+	if(test[0] === undefined)
+		return BlazeLayout.render('app', {content: '404'});
 
-		// if admin page
-		if(params.admin && test[0].admin === params.admin) {
-			var scores  = Scores.find({assessment: test[0].token}, {sort: {createdAt: -1}}).fetch()
-				, sum 	= 0;
+	// take test
+	Session.set('assessment', test[0]);
+	BlazeLayout.render("app", {content: "take"});
+})
 
-			Scores.forEach(s => sum += s.score);
+// admin page
+Router.route('/assessment/:token/:admin', function() {
+	var test = Tests.find({token: this.params.token}).fetch();
 
-			var mean = sum / scores.length;
+	if(test[0] === undefined)
+		return BlazeLayout.render('app', {content: '404'});
 
-			Session.set('scores.list', scores);
-			Session.set('scores.total', scores.length);
-			Session.set('scores.mean', mean);
-			return BlazeLayout.render('app', {content: 'admin'});
-		}
-
-		// take test
-		Session.set('assessment', test[0]);
-		BlazeLayout.render("app", {content: "take"});
+	if(test[0].admin === this.params.admin) {
+		Session.set('token', this.params.token);
+		return BlazeLayout.render('app', {content: 'admin'});
+	} else {
+		return BlazeLayout.render('app', {content: '404'});
 	}
 })
 
@@ -100,8 +94,8 @@ Template.create.events({
 			return;
 
 		// genereate exam and admin token
-		var token = generateId(8)
-			, admin = generateId(8);
+		var token 		= generateId(8)
+			, admin 	= generateId(8);
 
 		// create new test in mongo
 		Tests.insert({
@@ -177,5 +171,34 @@ Template.registerHelper('session',function(input){
 Template.take.helpers({
 	load(token) {
 		return Tests.findOne({token: token});
+	}
+});
+
+Template.admin.helpers({
+	scores() {
+		var tests 		= Scores.find({assessment: Session.get('token')}).fetch();
+		tests.forEach(t => {
+			t.score = Math.round(t.score / 5 * 100);
+			t.createdAt = (new Date(t.createdAt)).toString().split(' ').slice(0, 4).join(' ');
+		})
+
+		return tests;
+	},
+
+	mean() {
+		var tests 		= Scores.find({assessment: Session.get('token')}).fetch()
+		, sum 	  		= 0;
+
+		tests.forEach(s => sum += s.score);
+
+		var mean 		= sum / tests.length;
+
+		return Math.round(mean / 5 * 100);
+	},
+
+	total() {
+		var tests 		= Scores.find({assessment: Session.get('token')}).fetch();
+
+		return tests.length;
 	}
 });

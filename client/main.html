@@ -188,8 +188,8 @@
 		<h1 class="text-center">Assessment Overview</h1>
 		<div class="panel panel-default">
 			<div class="panel-body text-center">
-				<h2>Average <small>{{ session 'mean' }}</small></h2>
-				<h2>Total <small>{{ session 'total' }}</small></h2>
+				<h2 style="display: inline; margin: 0 20px">Average <small>{{ mean }}%</small></h2>
+				<h2 style="display: inline; margin: 0 20px">Total <small>{{ total }}</small></h2>
 			</div>
 		</div>
 
@@ -199,15 +199,19 @@
 				<th>Date</th>
 			</thead>
 			<tbody>
-				{{#each session 'scores'}}
-					<tr>
-						<td>{{this.score}}</td>
-						<td>{{this.createdAt}}</td>
-					</tr>
+				{{#each scores}}
+					{{ > adminscore }}
 				{{/each}}
 			</tbody>
 		</table>
 	</div>
+</template>
+
+<template name="adminscore">
+	<tr>
+		<td>{{score}}%</td>
+		<td>{{createdAt}}</td>
+	</tr>
 </template>
 
 <template name="404">
