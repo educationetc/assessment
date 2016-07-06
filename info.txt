@@ -1,3 +1,0 @@
-mongodb://client-532c8dab:18b768da-c1f6-988c-15ed-b76ca0cff8bd@SG-mother1-6242.servers.mongodirector.com:27017/calculus_meteor_com
--u client-532c8dab -p 18b768da-c1f6-988c-15ed-b76ca0cff8bd SG-mother1-6242.servers.mongodirector.com:27017/calculus_meteor_com
-

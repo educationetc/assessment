@@ -1,0 +1,221 @@
+<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+
+<template name="app">
+	<body>
+		<nav class="text-center">
+			<a href="/" style="display: block; padding-top: 20px; font-size: 30px; text-deocration: none !important; color: white">Assessment</a>
+		</nav>
+
+		<br><br><br><br><br><br>
+
+		<main>
+	    	{{>Template.dynamic template=content}}
+	    </main>
+    </body>
+</template>
+
+<template name="home">
+	<div class="container text-center">
+		<h1>Assessment</h1>
+		<br>
+
+		<div class="panel panel-default" style="max-width: 250px; margin: auto">
+			<div class="panel-body">
+				<form id="take-assessment">
+					<div class="form-group">
+						<input class="form-control" placeholder="Assessment Code" name="assessment">
+					</div>
+					<button class="btn btn-success" style="font-size: 14px; width: 100%">Take Assessment</button>
+				</form>
+			</div>
+		</div>
+		<br>
+		<div class="text-center">
+			<ul class="guide">
+				<li><a href="/create">Create Assessment</a></li>
+				<li>•</li>
+				<li><a href="/about">About</a></li>
+			</ul>
+		</div>
+	</div>
+</template>
+
+<template name="create">
+	<div class="container text-center">
+		<h1>Create Assessment!</h1>
+		<br>
+		<div class="panel panel-default" style="max-width: 300px; margin: auto">
+			<div class="panel-body">
+				<form id="new-assessment">
+			        <div class="form-group">
+			        1.
+			          <input type="radio" name="q1" value="A"> A
+			          <input type="radio" name="q1" value="B"> B
+			          <input type="radio" name="q1" value="C"> C
+			          <input type="radio" name="q1" value="D"> D
+			          <input type="radio" name="q1" value="E"> E
+			        </div>
+
+			        <div class="form-group">
+			        2.
+			          <input type="radio" name="q2" value="A"> A
+			          <input type="radio" name="q2" value="B"> B
+			          <input type="radio" name="q2" value="C"> C
+			          <input type="radio" name="q2" value="D"> D
+			          <input type="radio" name="q2" value="E"> E
+			        </div>
+
+			        <div class="form-group">
+			        3.
+			          <input type="radio" name="q3" value="A"> A
+			          <input type="radio" name="q3" value="B"> B
+			          <input type="radio" name="q3" value="C"> C
+			          <input type="radio" name="q3" value="D"> D
+			          <input type="radio" name="q3" value="E"> E
+			        </div>
+
+			        <div class="form-group">
+			        4.
+			          <input type="radio" name="q4" value="A"> A
+			          <input type="radio" name="q4" value="B"> B
+			          <input type="radio" name="q4" value="C"> C
+			          <input type="radio" name="q4" value="D"> D
+			          <input type="radio" name="q4" value="E"> E
+			        </div>
+
+			        <div class="form-group">
+			        5.
+			          <input type="radio" name="q5" value="A"> A
+			          <input type="radio" name="q5" value="B"> B
+			          <input type="radio" name="q5" value="C"> C
+			          <input type="radio" name="q5" value="D"> D
+			          <input type="radio" name="q5" value="E"> E
+			        </div>
+
+					<button type="submit" class="btn btn-success" style="width: 100%">Create! (:</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="take">
+	<div class="container text-center">
+		<h1>Take Assessment!</h1>
+		<br>
+		<div class="panel panel-default" style="max-width: 300px; margin: auto">
+			<div class="panel-body">
+				<form id="assessment">
+			        <div class="form-group">
+			        1.
+			          <input type="radio" name="q1" value="A"> A
+			          <input type="radio" name="q1" value="B"> B
+			          <input type="radio" name="q1" value="C"> C
+			          <input type="radio" name="q1" value="D"> D
+			          <input type="radio" name="q1" value="E"> E
+			        </div>
+
+			        <div class="form-group">
+			        2.
+			          <input type="radio" name="q2" value="A"> A
+			          <input type="radio" name="q2" value="B"> B
+			          <input type="radio" name="q2" value="C"> C
+			          <input type="radio" name="q2" value="D"> D
+			          <input type="radio" name="q2" value="E"> E
+			        </div>
+
+			        <div class="form-group">
+			        3.
+			          <input type="radio" name="q3" value="A"> A
+			          <input type="radio" name="q3" value="B"> B
+			          <input type="radio" name="q3" value="C"> C
+			          <input type="radio" name="q3" value="D"> D
+			          <input type="radio" name="q3" value="E"> E
+			        </div>
+
+			        <div class="form-group">
+			        4.
+			          <input type="radio" name="q4" value="A"> A
+			          <input type="radio" name="q4" value="B"> B
+			          <input type="radio" name="q4" value="C"> C
+			          <input type="radio" name="q4" value="D"> D
+			          <input type="radio" name="q4" value="E"> E
+			        </div>
+
+			        <div class="form-group">
+			        5.
+			          <input type="radio" name="q5" value="A"> A
+			          <input type="radio" name="q5" value="B"> B
+			          <input type="radio" name="q5" value="C"> C
+			          <input type="radio" name="q5" value="D"> D
+			          <input type="radio" name="q5" value="E"> E
+			        </div>
+
+					<button type="submit" class="btn btn-success" style="width: 100%">Submit c:</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="create_success">
+	<div class="container">
+		<h1 class="text-center">Success creating test!</h1>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<p>Exam: <a href="/assessment/{{ session 'token' }}">link</a></p>
+				<p>Admin: <a href="/assessment/{{ session 'token' }}/{{ session 'admin_token' }}">link</a></p>		
+			</div>
+		</div>	
+	</div>
+</template>
+
+<template name="score">
+	<div class="container text-center">
+		<div class="panel panel-default" style="max-width: 300px; margin: auto">
+			<div class="panel-body">
+				<h1>You scored an <small>{{ session 'score' }}%</small></h1>		
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="admin">
+	<div class="container" style="margin: auto; max-width: 600px">
+		<h1 class="text-center">Assessment Overview</h1>
+		<div class="panel panel-default">
+			<div class="panel-body text-center">
+				<h2>Average <small>{{ session 'mean' }}</small></h2>
+				<h2>Total <small>{{ session 'total' }}</small></h2>
+			</div>
+		</div>
+
+		<table class="table">
+			<thead>
+				<th>Score</th>
+				<th>Date</th>
+			</thead>
+			<tbody>
+				{{#each session 'scores'}}
+					<tr>
+						<td>{{this.score}}</td>
+						<td>{{this.createdAt}}</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</template>
+
+<template name="404">
+	<div class="container" style="max-width: 800px; margin: auto">
+		<br>
+		<div class="alert alert-warning">
+			<strong>Error</strong>
+			This page could not be found.
+		</div>
+	</div>
+</template>

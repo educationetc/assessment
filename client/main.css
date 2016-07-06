@@ -1,0 +1,21 @@
+body {
+	background-color: rgb(255, 204, 102);
+}
+
+nav {
+	height: 90px;
+	background-color: rgba(255, 80, 80, 0.6);
+	width: 100%;
+	box-shadow: 0 -5px 20px black;
+	position: fixed;
+	top: 0;
+	z-index: 3000;
+}
+
+.guide {
+	padding-left: 0;
+}
+
+.guide li {
+	display: inline;
+}
