@@ -9,7 +9,7 @@ Router.route('/:token', function() {
 		return BlazeLayout.render('app', {content: 'home', token: this.params.token});
 
 	if (!test)
-		return BlazeLayout.render('app', {error: 'Test not found'});
+		return BlazeLayout.render('app', {content: 'home', error: 'Test not found', token: this.params.token});
 
 	BlazeLayout.render('app', {content: 'assessment', answers: new Array(test.answers.length)});
 })
@@ -31,8 +31,6 @@ Template.assessment.events({
 		for (var i = 1; i < length + 1; i++)
 			answers += $('input[name="q' + i + '"]:checked').val();
 
-		console.log(length);
-
 		if (answers.includes('undefined'))
 			return $('#error').text('Please fill out entire assessment');
 
@@ -45,6 +43,6 @@ Template.assessment.events({
 			createdAt: Date.now()
 		});
 
-		BlazeLayout.render('app', {content: 'results'})
+		BlazeLayout.render('app', {content: 'results'});
 	}
 });

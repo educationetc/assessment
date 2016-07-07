@@ -7,9 +7,8 @@ Router.route('/', function () {
 Template.home.events({
 	'submit #token-form' (e) {
 		e.preventDefault();
-
 		var token = $('input[name="token"]').val(), 
-			test = Tests.findOne({token: token});
+		test = Tests.findOne({token: token});
 
 		if (!test)
 			return $('#error').text('Test not found');
