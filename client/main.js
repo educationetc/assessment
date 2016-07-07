@@ -7,10 +7,13 @@ import './main.html';
 /*	static pages	*/
 import './views/about.html';
 import './views/donate.html';
+import './views/404.html';
 
 /*	dynamic pages	*/
 import './views/assessment.html';
 import './controllers/assessment.js';
+import './controllers/create.js';
+import './controllers/edit.js';
 import './views/forgot.html';
 import './controllers/forgot.js';
 import './views/home.html';
