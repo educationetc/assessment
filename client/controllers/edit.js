@@ -1,6 +1,6 @@
-Router.route('/create', function() {
+Router.route('/edit', function() {
 	if(!Meteor.user())
-		return BlazeLayout.render('app', {content: '404'});
+		return BlazeLayout.render('app', {error: '404'});
 
 	var test = Tests.findOne({admin: Meteor.userId()});
 
