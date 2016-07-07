@@ -18,7 +18,6 @@ import './views/forgot.html';
 import './controllers/forgot.js';
 import './views/home.html';
 import './controllers/home.js';
-import './controllers/404.js';
 import './views/login_register.html';
 import './controllers/login_register.js';
 import './views/manage.html';

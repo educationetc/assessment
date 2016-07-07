@@ -4,5 +4,3 @@ Router.route('/create', function() {
 
 	BlazeLayout.render('app', {content: 'assessment'});
 })
-
-Template.cr
