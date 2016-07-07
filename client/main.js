@@ -97,8 +97,6 @@ Template.create.events({
 		var elems 		= [];
 		var children 	= form.children();
 
-		console.log(children);
-
 		// length of children, minus the submit element
 		for(var j = 0; j < children.length - 4; j++)
 			for(var i = 0; i < $(children[j]).children().length; i++)
@@ -166,7 +164,7 @@ Template.take.events({
 			createdAt: Date.now()
 		})
 
-		Session.set('score', Math.round(score / 5 * 100));
+		Session.set('score', Math.round(score / key.length * 100));
 		// redirect to score c:
 		BlazeLayout.render('app', {content: 'score'});
 	}
@@ -215,7 +213,7 @@ Template.admin.helpers({
 	scores() {
 		var tests 		= Scores.find({assessment: Session.get('token')}).fetch();
 		tests.forEach(t => {
-			t.score = Math.round(t.score / 5 * 100);
+			t.score = Math.round(t.score / assement.key.length * 100);
 			t.createdAt = (new Date(t.createdAt)).toString().split(' ').slice(0, 4).join(' ');
 		})
 
@@ -230,7 +228,7 @@ Template.admin.helpers({
 
 		var mean 		= sum / tests.length;
 
-		return Math.round(mean / 5 * 100);
+		return tests.length === 0 ? 0 : Math.round(mean / 5 * 100);
 	},
 
 	total() {
