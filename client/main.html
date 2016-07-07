@@ -1,6 +1,7 @@
 <head>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 
 <template name="app">
@@ -50,51 +51,19 @@
 		<div class="panel panel-default" style="max-width: 300px; margin: auto">
 			<div class="panel-body">
 				<form id="new-assessment">
-			        <div class="form-group">
-			        1.
-			          <input type="radio" name="q1" value="A"> A
-			          <input type="radio" name="q1" value="B"> B
-			          <input type="radio" name="q1" value="C"> C
-			          <input type="radio" name="q1" value="D"> D
-			          <input type="radio" name="q1" value="E"> E
-			        </div>
+					{{#each questions}}
+						<div class="form-group">
+							{{add @index}}.
+							<input type="radio" name="q{{add @index}}" value="A"> A
+							<input type="radio" name="q{{add @index}}" value="B"> B
+							<input type="radio" name="q{{add @index}}" value="C"> C
+							<input type="radio" name="q{{add @index}}" value="D"> D
+							<input type="radio" name="q{{add @index}}" value="E"> E
+						</div>
+					{{/each}}
 
-			        <div class="form-group">
-			        2.
-			          <input type="radio" name="q2" value="A"> A
-			          <input type="radio" name="q2" value="B"> B
-			          <input type="radio" name="q2" value="C"> C
-			          <input type="radio" name="q2" value="D"> D
-			          <input type="radio" name="q2" value="E"> E
-			        </div>
-
-			        <div class="form-group">
-			        3.
-			          <input type="radio" name="q3" value="A"> A
-			          <input type="radio" name="q3" value="B"> B
-			          <input type="radio" name="q3" value="C"> C
-			          <input type="radio" name="q3" value="D"> D
-			          <input type="radio" name="q3" value="E"> E
-			        </div>
-
-			        <div class="form-group">
-			        4.
-			          <input type="radio" name="q4" value="A"> A
-			          <input type="radio" name="q4" value="B"> B
-			          <input type="radio" name="q4" value="C"> C
-			          <input type="radio" name="q4" value="D"> D
-			          <input type="radio" name="q4" value="E"> E
-			        </div>
-
-			        <div class="form-group">
-			        5.
-			          <input type="radio" name="q5" value="A"> A
-			          <input type="radio" name="q5" value="B"> B
-			          <input type="radio" name="q5" value="C"> C
-			          <input type="radio" name="q5" value="D"> D
-			          <input type="radio" name="q5" value="E"> E
-			        </div>
-
+			        <button class="btn btn-primary" id="add-question" style="width: 100%"><i class="fa fa-plus" aria-hidden="true"></i></button>
+			        <br><br>
 					<button type="submit" class="btn btn-success" style="width: 100%">Create! (:</button>
 				</form>
 			</div>
@@ -109,50 +78,17 @@
 		<div class="panel panel-default" style="max-width: 300px; margin: auto">
 			<div class="panel-body">
 				<form id="assessment">
-			        <div class="form-group">
-			        1.
-			          <input type="radio" name="q1" value="A"> A
-			          <input type="radio" name="q1" value="B"> B
-			          <input type="radio" name="q1" value="C"> C
-			          <input type="radio" name="q1" value="D"> D
-			          <input type="radio" name="q1" value="E"> E
-			        </div>
-
-			        <div class="form-group">
-			        2.
-			          <input type="radio" name="q2" value="A"> A
-			          <input type="radio" name="q2" value="B"> B
-			          <input type="radio" name="q2" value="C"> C
-			          <input type="radio" name="q2" value="D"> D
-			          <input type="radio" name="q2" value="E"> E
-			        </div>
-
-			        <div class="form-group">
-			        3.
-			          <input type="radio" name="q3" value="A"> A
-			          <input type="radio" name="q3" value="B"> B
-			          <input type="radio" name="q3" value="C"> C
-			          <input type="radio" name="q3" value="D"> D
-			          <input type="radio" name="q3" value="E"> E
-			        </div>
-
-			        <div class="form-group">
-			        4.
-			          <input type="radio" name="q4" value="A"> A
-			          <input type="radio" name="q4" value="B"> B
-			          <input type="radio" name="q4" value="C"> C
-			          <input type="radio" name="q4" value="D"> D
-			          <input type="radio" name="q4" value="E"> E
-			        </div>
-
-			        <div class="form-group">
-			        5.
-			          <input type="radio" name="q5" value="A"> A
-			          <input type="radio" name="q5" value="B"> B
-			          <input type="radio" name="q5" value="C"> C
-			          <input type="radio" name="q5" value="D"> D
-			          <input type="radio" name="q5" value="E"> E
-			        </div>
+			        
+					{{#each questions}}
+						<div class="form-group">
+							{{add @index}}.
+							<input type="radio" name="q{{add @index}}" value="A"> A
+							<input type="radio" name="q{{add @index}}" value="B"> B
+							<input type="radio" name="q{{add @index}}" value="C"> C
+							<input type="radio" name="q{{add @index}}" value="D"> D
+							<input type="radio" name="q{{add @index}}" value="E"> E
+						</div>
+					{{/each}}
 
 					<button type="submit" class="btn btn-success" style="width: 100%">Submit c:</button>
 				</form>
@@ -212,6 +148,17 @@
 		<td>{{score}}%</td>
 		<td>{{createdAt}}</td>
 	</tr>
+</template>
+
+<template name="question">
+	<div class="form-group">
+    {{add @index}}.
+      <input type="radio" name="q{{add @index}}" value="A"> A
+      <input type="radio" name="q{{add @index}}" value="B"> B
+      <input type="radio" name="q{{add @index}}" value="C"> C
+      <input type="radio" name="q{{add @index}}" value="D"> D
+      <input type="radio" name="q{{add @index}}" value="E"> E
+    </div>
 </template>
 
 <template name="404">

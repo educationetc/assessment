@@ -26,6 +26,7 @@ Router.route('/', function() {
 
 // create exam page
 Router.route('/create', function() {
+	Session.set('questions', [{}, {}, {}, {}, {}]);
     BlazeLayout.render("app", {content: "create"});
 });
 
@@ -35,6 +36,13 @@ Router.route('/assessment/:token', function() {
 
 	if(test[0] === undefined)
 		return BlazeLayout.render('app', {content: '404'});
+
+	var questions 	= [];
+	
+	for(var j = 0; j < key.length; j ++)
+		questions.push({});
+
+	Session.set('questions', questions)
 
 	// take test
 	Session.set('assessment', test[0]);
@@ -76,6 +84,12 @@ Template.home.events({
 
 // create test form
 Template.create.events({
+	'click #add-question'(e) {
+		var questions 	= Session.get('questions');
+		questions.push({});
+		Session.set('questions', questions);
+	},
+
 	'submit #new-assessment'(e) {
 		e.preventDefault();
 
@@ -83,8 +97,10 @@ Template.create.events({
 		var elems 		= [];
 		var children 	= form.children();
 
+		console.log(children);
+
 		// length of children, minus the submit element
-		for(var j = 0; j < children.length - 1; j++)
+		for(var j = 0; j < children.length - 4; j++)
 			for(var i = 0; i < $(children[j]).children().length; i++)
 				if($(children[j]).children()[i].checked)
 					elems.push($($(children[j]).children()[i]).val());
@@ -121,6 +137,8 @@ Template.take.events({
 		var form 		= $('#assessment');
 		var elems 		= [];
 		var children 	= form.children();
+
+		var questions 	= [];
 
 		// length of children, minus the submit element
 		for(var j = 0; j < children.length - 1; j++)
@@ -164,7 +182,6 @@ Template.take.events({
 // global
 Template.registerHelper('session',function(input){
 	var i = Session.get(input);
-	console.log('Got session: ' + i);
 	return Session.get(input);
 }); 
 
@@ -173,6 +190,26 @@ Template.take.helpers({
 		return Tests.findOne({token: token});
 	}
 });
+
+Template.create.helpers({
+	questions() {
+		return Session.get('questions');
+	},
+
+	add(int) {
+		return int + 1;
+	}
+})
+
+Template.take.helpers({
+	questions() {
+		return Session.get('questions');
+	},
+
+	add(int) {
+		return int + 1;
+	}
+})
 
 Template.admin.helpers({
 	scores() {
