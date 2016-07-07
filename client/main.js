@@ -1,3 +1,6 @@
+/*	mongo	*/
+import { Tests } from '../mongo/tests.js';
+
 /*	app template	*/
 import './main.html';
 
