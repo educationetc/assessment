@@ -2,12 +2,16 @@ import { Tests } from '../../mongo/tests.js';
 import { Scores } from '../../mongo/scores.js';
 
 Router.route('/:token', function() {
+
 	var test = Tests.findOne({token: this.params.token});
 
-	if(!test)
+	if (!Session.get('student-id'))
+		return BlazeLayout.render('app', {content: 'home', token: this.params.token});
+
+	if (!test)
 		return BlazeLayout.render('app', {error: 'Test not found'});
 
-	BlazeLayout.render('app', {content: 'assessment', answers: test.answers});
+	BlazeLayout.render('app', {content: 'assessment', answers: new Array(test.answers.length)});
 })
 
 Template.assessment.helpers({
