@@ -3,7 +3,7 @@ Router.route('/', function () {
 });
 
 Template.home.events({
-	'submit #token-form': function (e) {
+	'submit #token-form' (e) {
 		e.preventDefault();
 
 		//query db using token
@@ -13,9 +13,9 @@ Template.home.events({
 		$('#token-form').attr('id', 'student-id-form');
 	},
 
-	'submit #student-id-form': function () {
+	'submit #student-id-form' (e) {
 		e.preventDefault();
 
 		BlazeLayout.render('app', {content: 'assessment'});
-	}
+	},
 });
