@@ -1,11 +1,11 @@
-//app template
+/*	app template	*/
 import './main.html';
 
-//static pages
+/*	static pages	*/
 import '../views/about.html';
 import '../views/donate.html';
 
-//dynamic pages
+/*	dynamic pages	*/
 import '../views/assessment.html';
 import '../views/assessment.js';
 import '../views/forgot.html';
