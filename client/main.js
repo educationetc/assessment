@@ -1,22 +1,22 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-
+//app template
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
+//static pages
+import '../views/about.html';
+import '../views/donate.html';
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
+//dynamic pages
+import '../views/assessment.html';
+import '../views/assessment.js';
+import '../views/forgot.html';
+import '../views/forgot.js';
+import '../views/home.html';
+import '../views/home.js';
+import '../views/login_register.html';
+import '../views/login_register.js';
+import '../views/manage.html';
+import '../views/manage.js';
+import '../views/settings.html';
+import '../views/settings.js';
+import '../views/view.html';
+import '../views/view.js';
