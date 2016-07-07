@@ -22,8 +22,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 session
 iron:router
 kadira:blaze-layout
-accounts-ui-unstyled
-accounts-base
-accounts-password
-accounts-ui
 twbs:bootstrap
