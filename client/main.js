@@ -7,16 +7,16 @@ import '../views/donate.html';
 
 /*	dynamic pages	*/
 import '../views/assessment.html';
-import '../views/assessment.js';
+import '../controllers/assessment.js';
 import '../views/forgot.html';
-import '../views/forgot.js';
+import '../controllers/forgot.js';
 import '../views/home.html';
-import '../views/home.js';
+import '../controllers/home.js';
 import '../views/login_register.html';
-import '../views/login_register.js';
+import '../controllers/login_register.js';
 import '../views/manage.html';
-import '../views/manage.js';
+import '../controllers/manage.js';
 import '../views/settings.html';
-import '../views/settings.js';
+import '../controllers/settings.js';
 import '../views/view.html';
-import '../views/view.js';
+import '../controllers/view.js';
