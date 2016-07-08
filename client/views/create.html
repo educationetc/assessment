@@ -1,18 +1,25 @@
 <template name="create">
 	<form id="new-assessment">
+		<label>Questions</label>
 		{{#each questions}}
 			<div class="form-group">
 				{{add @index}}.
-				<input type="radio" name="q{{add @index}}" value="A">
-				<input type="radio" name="q{{add @index}}" value="B">
-				<input type="radio" name="q{{add @index}}" value="C">
-				<input type="radio" name="q{{add @index}}" value="D">
-				<input type="radio" name="q{{add @index}}" value="E">
+				<input type="radio" name="q{{add @index}}" value="A" required>
+				<input type="radio" name="q{{add @index}}" value="B" required>
+				<input type="radio" name="q{{add @index}}" value="C" required>
+				<input type="radio" name="q{{add @index}}" value="D" required>
+				<input type="radio" name="q{{add @index}}" value="E" required>
 			</div>
 		{{/each}}
-
 		<button id="add-question"><i class="fa fa-plus" aria-hidden="true"></i></button>
+		<br><br>
+		<div class="form-group">
+			<label>Name</label>
+			<br>
+			<input name="name" placeholder="Trig Functions Assessment">
+		</div>
 		<br>
+
 		<button type="submit">Submit c:</button>
 	</form>
 </template>

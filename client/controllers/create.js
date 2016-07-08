@@ -33,8 +33,12 @@ Template.create.events({
 	'submit #new-assessment' (e) {
 		e.preventDefault();
 
-		var answers = ''
-			, length = $('.form-group').length;
+		var answers 	= '',
+			length 		= $('.form-group').length - 1,
+			name 		= $('input[name="name"]').val();
+
+		if(!name)
+			return $('#error').text('Please name your test.');
 
 		for (var i = 1; i < length + 1; i++)
 			answers += $('input[name="q' + i + '"]:checked').val();
@@ -45,6 +49,7 @@ Template.create.events({
 		Tests.insert({
 			token: generateId(6),
 			admin: Meteor.userId(),
+			name: name,
 			answers: answers.split(''),
 			createdAt: Date.now()
 		});
