@@ -3,7 +3,7 @@ import { Scores } from '../../mongo/scores.js';
 
 var test;
 
-Router.route('/t/:token', function() {
+Router.route('/:token/t', function() {
 
 	test = Tests.findOne({token: this.params.token});
 
@@ -44,8 +44,11 @@ Template.assessment.events({
 				percentage += 100 / length;
 				numCorrect++;
 			}
+		percentage = ~~percentage;	
 
 		$('#error').text('');
+
+		window.removeEventListener('blur', noCheating);
 
 		Scores.insert({
 			token: Session.get('token'),
@@ -56,6 +59,14 @@ Template.assessment.events({
 			createdAt: Date.now()
 		});
 
-		BlazeLayout.render('app', {content: 'results', percentage: ~~percentage, numCorrect: numCorrect, length: length});
+		BlazeLayout.render('app', {content: 'results', percentage: percentage, numCorrect: numCorrect, length: length});
 	}
 });
+
+Template.assessment.onCreated(function () {
+	window.addEventListener('blur', noCheating);
+});
+
+function noCheating() {
+    $('#error').text('Do not leave the page or your test will be voided');;
+}

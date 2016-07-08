@@ -1,5 +1,6 @@
 /*	mongo	*/
-import { Tests } from '../mongo/tests.js';
+import { Tests } from './mongo/tests.js';
+import { Scores } from './mongo/scores.js';
 
 /*	app template	*/
 import './main.html';
@@ -20,8 +21,8 @@ import './views/home.html';
 import './controllers/home.js';
 import './views/login_register.html';
 import './controllers/login_register.js';
-import './views/manage.html';
-import './controllers/manage.js';
+import './views/dashboard.html';
+import './controllers/dashboard.js';
 import './views/settings.html';
 import './controllers/settings.js';
 import './views/view.html';
