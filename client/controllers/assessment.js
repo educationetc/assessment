@@ -21,9 +21,9 @@ Template.assessment.events({
 
 		e.preventDefault();
 
-		var answers = '',
-			length = test.answers.length,
-			percentage = numCorrect = 0;
+		var answers		= '',
+			length		= test.answers.length,
+			percentage	= numCorrect = 0;
 
 		for (var i = 1; i < length + 1; i++)
 			answers += $('input[name="q' + i + '"]:checked').val();

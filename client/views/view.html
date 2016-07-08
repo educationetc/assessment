@@ -5,6 +5,7 @@
 			<th>Student ID</th>
 			<th>Score</th>
 			<th>Percentage</th> 
+			<th>Date Taken</th>
 		</tr>
 		{{#each scores}}
 		<tr>
@@ -12,6 +13,7 @@
 			<td>{{this.studentId}}</td> 
 			<td>{{this.numCorrect}} out of {{this.answers.length}}</td>
 			<td>{{this.percentage}}%</td>
+			<td>{{date this.createdAt}}</td>
 		</tr>
 		{{/each}}
 	</table>
