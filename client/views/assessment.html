@@ -3,11 +3,11 @@
 			{{#each answers}}
 				<div class="form-group">
 					{{add @index}}.
-					<input type="radio" name="q{{add @index}}" value="A">A
-					<input type="radio" name="q{{add @index}}" value="B">B
-					<input type="radio" name="q{{add @index}}" value="C">C
-					<input type="radio" name="q{{add @index}}" value="D">D
-					<input type="radio" name="q{{add @index}}" value="E">E
+					<input type="radio" name="q{{add @index}}" value="A" required>A
+					<input type="radio" name="q{{add @index}}" value="B" required>B
+					<input type="radio" name="q{{add @index}}" value="C" required>C
+					<input type="radio" name="q{{add @index}}" value="D" required>D
+					<input type="radio" name="q{{add @index}}" value="E" required>E
 				</div>
 			{{/each}}
 		<button type="submit">Submit Assessment</button>
