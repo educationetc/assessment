@@ -1,0 +1,17 @@
+<template name="create">
+	<form id="new-assessment">
+		{{#each questions}}
+			<div class="form-group">
+				{{add @index}}.
+				<input type="radio" name="q{{add @index}}" value="A">
+				<input type="radio" name="q{{add @index}}" value="B">
+				<input type="radio" name="q{{add @index}}" value="C">
+				<input type="radio" name="q{{add @index}}" value="D">
+				<input type="radio" name="q{{add @index}}" value="E">
+			</div>
+		{{/each}}
+
+		<button style="width: 100%" id="add-question"><i class="fa fa-plus" aria-hidden="true"></i></button>
+		<button type="submit" style="width: 100%">Submit c:</button>
+	</form>
+</template>
