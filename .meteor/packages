@@ -23,3 +23,5 @@ session
 iron:router
 kadira:blaze-layout
 twbs:bootstrap
+accounts-base
+accounts-password

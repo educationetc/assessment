@@ -16,6 +16,7 @@ Router.route('/create', function() {
 	if(!Meteor.user())
 		return BlazeLayout.render('app', {error: '404'});
 
+	Session.set('questions', new Array(5));
 	BlazeLayout.render('app', {content: 'create'});
 })
 
@@ -23,39 +24,41 @@ Template.create.events({
 	'click #add-question'(e) {
 		e.preventDefault();
 
-		Session.set('questions', Session.get('questions').push({}));
+		var questions = Session.get('questions');
+		questions.push(null);
+
+		Session.set('questions', questions);
 	},
 
-	'submit #new-assessment'(e) {
+	'submit #new-assessment' (e) {
 		e.preventDefault();
 
-		var answers = '',
-			length = $('.form-group').length;
+		var answers = ''
+			, length = $('.form-group').length;
 
 		for (var i = 1; i < length + 1; i++)
 			answers += $('input[name="q' + i + '"]:checked').val();
 
-		console.log(length);
-
 		if (answers.includes('undefined'))
 			return $('#error').text('Please fill out entire assessment');
 
-		$('#error').text('');
-
-		Test.insert({
-			token: generateId(5),
-			// admin: Meteor.userId(),
+		Tests.insert({
+			token: generateId(6),
+			admin: Meteor.userId(),
 			answers: answers.split(''),
 			createdAt: Date.now()
 		});
 
-
-		// BlazeLayout.render('app', {content: 'results'})
+		Router.go('/dashboard');
 	}
 })
 
 Template.create.helpers({
 	questions() {
 		return Session.get('questions');
+	},
+
+	add(int) {
+		return int+1;
 	}
 })
