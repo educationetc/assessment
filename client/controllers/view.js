@@ -11,7 +11,7 @@ Router.route('/:token/view', function () {
 });
 
 Template.view.helpers({
-	add(int) {
-		return int + 1;
+	date (date) {
+		return (new Date(date)).toString().split(' ').slice(0, 4).join(' ');
 	}
 })
