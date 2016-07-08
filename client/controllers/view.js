@@ -1,13 +1,22 @@
 import { Scores } from '../../mongo/scores.js';
+import { Tests } from '../../mongo/tests.js';
 
 Router.route('/:token/view', function () {
 
-	var scores = Scores.find({token: this.params.token});
+	var test = Tests.findOne({token: this.params.token});
 
-	if (!scores)
-		BlazeLayout.render('app', {content: 'view', error: 'No scores found'})
+	console.log(Meteor.user());
 
-	BlazeLayout.render('app', {content: 'view', scores: scores.fetch()});
+	if (!Meteor.user() || !test || test.admin !== Meteor.userId())
+		return BlazeLayout.render('app', {content: '404'});
+
+
+	var scores = Scores.find({token: this.params.token}).fetch();
+
+	if (scores.length === 0)
+		return BlazeLayout.render('app', {content: 'view', error: 'No scores found'});
+
+	BlazeLayout.render('app', {content: 'view', scores: scores});
 });
 
 Template.view.helpers({

@@ -4,16 +4,14 @@ import { Scores } from '../../mongo/scores.js';
 var tests;
 
 Router.route('/dashboard', function() {
+
 	if(!Meteor.user())
-		return Router.go('/login');
+		return BlazeLayout.render('app', {content: '404'});
 
 	/*	find user's authored tests	*/
 	tests = Tests.find({admin: Meteor.userId()}, {sort: {createdAt: -1}})
 
-	if(tests)
-		tests = tests.fetch();
-	else
-		tests = [];
+	tests = tests ? tests.fetch() : [];
 
 	BlazeLayout.render('app', {content: 'dashboard', tests: tests});
 })
