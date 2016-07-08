@@ -7,28 +7,38 @@ Router.route('/', function () {
 Template.home.events({
 	'submit #token-form' (e) {
 		e.preventDefault();
-		var token = $('input[name="token"]').val(), 
-		test = Tests.findOne({token: token});
-
-		if (!test)
-			return $('#error').text('Test not found');
-
-		$('#error').text('');
-		$('#success').text('Test found!');
-
-		Session.set('token', test.token);
-
-		$('#id').show();
-		$('#token-form').attr('id', 'student-id-form');
+		checkToken($('input[name="token"]').val());
 	},
 
 	'submit #student-id-form' (e) {
 		e.preventDefault();
 
 		$('#success').text('');
+		$('#error').text('');
 
-		Session.set('student-id', $('input[name="student-id"]').val());
+		var id = $('input[name="student-id"]').val();
 
-		Router.go('/' + Session.get('token'));
+		if (!id)
+			return $('#error').text('Please enter student id')
+
+		Session.set('student-id', id);
+
+		Router.go('/t/' + Session.get('token'));
 	},
 });
+
+function checkToken(token) {
+
+	var test = Tests.findOne({token: token});
+
+	if (!test)
+		return $('#error').text('Test not found');
+
+	$('#error').text('');
+	$('#success').text('Test found!');
+
+	Session.set('token', test.token);
+
+	$('#id').show();
+	$('#token-form').attr('id', 'student-id-form');
+}

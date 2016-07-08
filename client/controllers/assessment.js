@@ -1,9 +1,11 @@
 import { Tests } from '../../mongo/tests.js';
 import { Scores } from '../../mongo/scores.js';
 
-Router.route('/:token', function() {
+var test;
 
-	var test = Tests.findOne({token: this.params.token});
+Router.route('/t/:token', function() {
+
+	test = Tests.findOne({token: this.params.token});
 
 	if (!Session.get('student-id'))
 		return BlazeLayout.render('app', {content: 'home', token: this.params.token});
@@ -26,7 +28,8 @@ Template.assessment.events({
 		e.preventDefault();
 
 		var answers = '',
-			length = $('input').length / 5;
+			length = test.answers.length,
+			percentage = numCorrect = 0;
 
 		for (var i = 1; i < length + 1; i++)
 			answers += $('input[name="q' + i + '"]:checked').val();
@@ -34,15 +37,25 @@ Template.assessment.events({
 		if (answers.includes('undefined'))
 			return $('#error').text('Please fill out entire assessment');
 
+		answers = answers.split('');
+
+		for (var i = 0; i < answers.length; i++)
+			if (answers[i] === test.answers[i]) {
+				percentage += 100 / length;
+				numCorrect++;
+			}
+
 		$('#error').text('');
 
 		Scores.insert({
 			token: Session.get('token'),
 			studentId: Session.get('student-id'),
-			answers: answers.split(''),
+			answers: answers,
+			percentage: percentage,
+			numCorrect: numCorrect,
 			createdAt: Date.now()
 		});
 
-		BlazeLayout.render('app', {content: 'results'});
+		BlazeLayout.render('app', {content: 'results', percentage: ~~percentage, numCorrect: numCorrect, length: length});
 	}
 });
