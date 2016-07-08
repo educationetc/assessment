@@ -16,12 +16,6 @@ Router.route('/:token/t', function() {
 	BlazeLayout.render('app', {content: 'assessment', answers: new Array(test.answers.length)});
 })
 
-Template.assessment.helpers({
-	add (int) {
-		return int + 1;
-	}
-});
-
 Template.assessment.events({
 	'submit #assessment-form' (e) {
 

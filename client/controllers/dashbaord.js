@@ -28,9 +28,9 @@ Template.dashboard.helpers({
 			scores 			= scores.fetch();
 			var sum 		= 0;
 
-			scores.forEach(s => sum += s.numCorrect);
+			scores.forEach(s => sum += s.percentage);
 
-			var avg 		= sum / scores.length;
+			var avg 		= ~~(sum / scores.length) + '%';
 
 			t.avg 			= avg ? avg : 0;
 			t.scores 		= scores;
@@ -38,9 +38,5 @@ Template.dashboard.helpers({
 		})
 
 		return tests;
-	},
-
-	add(int) {
-		return int + 1;
 	}
 })

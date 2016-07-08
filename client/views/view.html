@@ -1,12 +1,14 @@
 <template name="view">
-	<table>
-		<tr>
+	<table class="table">
+		<tr>	
+			<th>#</th>
 			<th>Student ID</th>
 			<th>Score</th>
 			<th>Percentage</th> 
 		</tr>
 		{{#each scores}}
 		<tr>
+			<td>{{ add @index }}</td>
 			<td>{{this.studentId}}</td> 
 			<td>{{this.numCorrect}} out of {{this.answers.length}}</td>
 			<td>{{this.percentage}}%</td>

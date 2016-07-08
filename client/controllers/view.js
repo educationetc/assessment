@@ -9,3 +9,9 @@ Router.route('/:token/view', function () {
 
 	BlazeLayout.render('app', {content: 'view', scores: scores.fetch()});
 });
+
+Template.view.helpers({
+	add(int) {
+		return int + 1;
+	}
+})

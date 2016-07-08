@@ -1,6 +1,6 @@
 /*	mongo	*/
-import { Tests } from './mongo/tests.js';
-import { Scores } from './mongo/scores.js';
+import { Tests } from '../mongo/tests.js';
+import { Scores } from '../mongo/scores.js';
 /*
 ------------ schemas ------------
 Tests
@@ -26,3 +26,7 @@ Users
 }
 ------------ /schemas -----------
 */
+
+Template.registerHelper('add', (int) => {
+	return int + 1;
+})
