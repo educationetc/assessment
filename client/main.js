@@ -1,6 +1,6 @@
 /*	mongo	*/
-import { Tests } from '../mongo/tests.js';
-
+import { Tests } from './mongo/tests.js';
+import { Scores } from './mongo/scores.js';
 /*
 ------------ schemas ------------
 Tests

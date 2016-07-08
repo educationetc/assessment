@@ -23,7 +23,7 @@ Template.home.events({
 
 		Session.set('student-id', id);
 
-		Router.go('/t/' + Session.get('token'));
+		Router.go('/' + Session.get('token') + '/t');
 	},
 });
 
