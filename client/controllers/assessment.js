@@ -17,6 +17,9 @@ Router.route('/:token/t', function() {
 
 	length = test.answers.length;
 
+	if (!isMissingId()) /* this test has already been created, avoid two db entries */
+		return;
+
 	Scores.insert({
 		testId: test._id,
 		studentId: Session.get('student-id'),
@@ -80,6 +83,7 @@ Template.assessment.events({
 				$set: {
 					answers: res.responses,
 					percentage: res.percentage,
+					total: res.total,
 					numCorrect: res.numCorrect
 				}
 			}
@@ -121,8 +125,12 @@ function processResponses(mustBeCompleted) {
 }
 
 function isMissingId() {
-	if (!id)
-		id = Scores.findOne({testId: test._id, studentId: Session.get('student-id')})._id;
+	if (!id) {
+		id = Scores.findOne({testId: test._id, studentId: Session.get('student-id')});
+		if (id)
+			id = id._id;
+	}
+
 	if (!id)
 		return true;
 }

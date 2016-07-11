@@ -19,9 +19,11 @@ Template.home.events({
 		var id = $('input[name="student-id"]').val();
 
 		if (!id)
-			return $('#error').text('Please enter student id')
+			return $('#error').text('Please enter student id');
 
 		Session.set('student-id', id);
+
+		console.log('lah');
 
 		Router.go('/' + Session.get('token') + '/t');
 	},
