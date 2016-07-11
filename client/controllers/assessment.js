@@ -1,7 +1,9 @@
 import { Tests } from '../../mongo/tests.js';
 import { Scores } from '../../mongo/scores.js';
 
-var test, answers;
+var test, /* the test object */
+	length, /* the length of the test */
+	id; /* the _id of the current student response in the scores collection */
 
 Router.route('/:token/t', function() {
 
@@ -13,18 +15,18 @@ Router.route('/:token/t', function() {
 	if (!test)
 		return BlazeLayout.render('app', {content: 'home', error: 'Test not found', token: this.params.token});
 
-	answers = new Array(test.answers.length);
+	length = test.answers.length;
 
 	Scores.insert({
-		token: Session.get('token'),
+		testId: test._id,
 		studentId: Session.get('student-id'),
-		answers: answers,
+		answers: (new Array(length)).fill('F'),
 		percentage: 0,
 		numCorrect: 0,
 		createdAt: 0
 	});
 
-	BlazeLayout.render('app', {content: 'assessment', answers: answers});
+	BlazeLayout.render('app', {content: 'assessment', answers: new Array(length)});
 })
 
 Template.assessment.events({
@@ -32,44 +34,56 @@ Template.assessment.events({
 
 		e.preventDefault();
 
-		var answers		= '',
-			length		= test.answers.length,
-			percentage	= numCorrect = 0;
+		var res = processResponses(true);
 
-		for (var i = 1; i < length + 1; i++)
-			answers += $('input[name="q' + i + '"]:checked').val();
-
-		if (answers.includes('undefined'))
+		if (!res)
 			return $('#error').text('Please fill out entire assessment');
-
-		answers = answers.split('');
-
-		for (var i = 0; i < answers.length; i++)
-			if (answers[i] === test.answers[i]) {
-				percentage += 100 / length;
-				numCorrect++;
-			}
-		percentage = ~~percentage;	
-
-		$('#error').text('');
 
 		window.removeEventListener('blur', noCheating);
 
+		if (isMissingId())
+			return $('#error').text('Server connectivity lost');
+		$('#error').text('');
+
 		Scores.update(
 			{
-				token: Session.get('token'),
-				studentId: Session.get('student-id')
+				_id: id
 			},
 
 			{
-				answers: answers,
-				percentage: percentage,
-				numCorrect: numCorrect,
-				createdAt: Date.now()
+				$set: {
+					answers: res.responses,
+					percentage: res.percentage,
+					numCorrect: res.numCorrect,
+					createdAt: Date.now()
+				}
 			}
-		});
+		);
 
-		BlazeLayout.render('app', {content: 'results', percentage: percentage, numCorrect: numCorrect, length: length});
+		BlazeLayout.render('app', {content: 'results', percentage: res.percentage, numCorrect: res.numCorrect, length: length});
+	},
+
+	'change input' (e) {
+
+		var res = processResponses(false);
+
+		if (isMissingId())
+			return $('#error').text('Server connectivity lost');
+		$('#error').text('');
+
+		Scores.update(
+			{
+				_id: id
+			},
+
+			{
+				$set: {
+					answers: res.responses,
+					percentage: res.percentage,
+					numCorrect: res.numCorrect
+				}
+			}
+		);
 	}
 });
 
@@ -79,4 +93,36 @@ Template.assessment.onCreated(function () {
 
 function noCheating() {
     $('#error').text('Do not leave the page or your test will be voided');;
+}
+
+function processResponses(mustBeCompleted) {
+	
+	var responses = '',
+		percentage = numCorrect = total = 0;
+
+	for (var i = 1; i < length + 1; i++)
+		responses += $('input[name="q' + i + '"]:checked').val();
+
+	if (responses.includes('undefined') && mustBeCompleted)
+		return false;
+
+	responses = responses.replace(/undefined/g, 'F'); /* F signifies a blank response */
+	responses = responses.split('');
+
+	for (var i = 0; i < length; i++) {
+		if (responses[i] === 'F') continue;
+		total++;
+		if (responses[i] === test.answers[i]) numCorrect++;
+	}
+
+	percentage = Math.round(numCorrect / total * 100);
+
+	return {percentage: percentage, responses: responses, numCorrect: numCorrect};
+}
+
+function isMissingId() {
+	if (!id)
+		id = Scores.findOne({testId: test._id, studentId: Session.get('student-id')})._id;
+	if (!id)
+		return true;
 }
