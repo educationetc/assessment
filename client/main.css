@@ -1,1 +1,106 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700,500,300");
+
+/*	global reset	*/
+* {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
 /* CSS declarations go here */
+@keyframes bgcolor {
+	0% {
+	    background-color: #45a3e5;
+	}
+	17% {
+	    background-color: #3cc;
+	}
+	34% {
+	    background-color: #66bf39;
+	}
+	51% {
+	    background-color: #ffa602;
+	}
+	67% {
+	    background-color: #eb670f;
+	}
+	84% {
+	    background-color: #f35;
+	}
+	100% {
+	    background-color: #864cbf;
+	}
+}
+
+body {
+	min-height: 100vh;
+	/*animation-name: bgcolor;
+    animation-duration: 20s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;    
+    animation-play-state: running;*/
+    background-color: #ff5050;
+    font-family: 'Ubuntu';
+    position: relative;
+}
+
+.assessment-input {
+	outline: none;
+    text-align: center !important;
+    padding: 5px 12px;
+    font-size: 20px;
+    border: 3px solid #e6e6e6;
+    display: inline-block;
+}
+
+.assessment-button {
+    color: white;
+    padding: 6px 0px;
+    background-color: #333333;
+    border: 3px solid #262626;
+    width: 240px;
+    font-size: 20px;
+    outline: none;
+    transition: all 0.4s ease;
+}
+
+.assessment-button:hover {
+	border: 3px solid white !important;
+}
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+  color: white;
+}
+
+footer a {
+	text-decoration: none;
+	color: white;
+}
+
+footer ul {
+	padding: 0;
+	margin: 0;
+}
+
+footer ul li {
+	list-style-type: none;
+	display: inline;
+}
+
+#add-question {
+	background-color: #4dff4d;
+	border: 3px solid #009900;
+	width: 120px;
+}
+
+#remove-question {
+	background-color: #ff5050;
+	border: 3px solid #cc0000;
+	width: 120px;
+}

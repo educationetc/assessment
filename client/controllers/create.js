@@ -30,6 +30,15 @@ Template.create.events({
 		Session.set('questions', questions);
 	},
 
+	'click #remove-question'(e) {
+		e.preventDefault();
+
+		var questions = Session.get('questions');
+		questions.pop();
+
+		Session.set('questions', questions);
+	},
+
 	'submit #new-assessment' (e) {
 		e.preventDefault();
 

@@ -5,11 +5,11 @@ var tests;
 
 Router.route('/dashboard', function() {
 	if(!Meteor.user())
-		return Router.go('/login');
+		BlazeLayout.render('app', {content: '404'});
 
 	/*	find user's authored tests	*/
 	tests = Tests.find({admin: Meteor.userId()}, {sort: {createdAt: -1}})
-
+	
 	if(tests)
 		tests = tests.fetch();
 	else
@@ -21,7 +21,7 @@ Router.route('/dashboard', function() {
 Template.dashboard.helpers({
 	tests() {
 		tests.forEach(t => {
-			var scores = Scores.find({token: t.token});
+			var scores = Scores.find({testId: t._id});
 			if(!scores)
 				return;
 

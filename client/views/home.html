@@ -1,12 +1,15 @@
 <template name="home">
-<form id="token-form">
-	<label>Enter Assessment Token:</label>
-	<input name="token" placeholder="A2g5k" value="{{token}}">
-	<div id="id" hidden>
-		<label>Enter Student ID:</label>
-		<input name="student-id" placeholder="18278">
+	<div class="container text-center">
+		<br><br><br><br><br>
+		<h1 style="font-size: 40px">Assessment</h1>
+		<br>
+		<form id="token-form">
+			<input class="assessment-input" name="token" placeholder="A2g5k" value="{{token}}">
+			<div id="id" hidden>
+				<input class="assessment-input" name="student-id" placeholder="18278">
+			</div>
+			<br>
+			<button class="assessment-button" type="submit" style="margin-top: 10px">Submit</button>
+		</form>
 	</div>
-	<br>
-	<button type="submit">Submit</button>
-</form>
 </template>

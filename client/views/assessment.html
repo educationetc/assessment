@@ -1,15 +1,19 @@
 <template name="assessment">
-	<form id="assessment-form">
-			{{#each answers}}
-				<div class="form-group">
-					{{add @index}}.
-					<input type="radio" name="q{{add @index}}" value="A">A
-					<input type="radio" name="q{{add @index}}" value="B">B
-					<input type="radio" name="q{{add @index}}" value="C">C
-					<input type="radio" name="q{{add @index}}" value="D">D
-					<input type="radio" name="q{{add @index}}" value="E">E
-				</div>
-			{{/each}}
-		<button type="submit">Submit Assessment</button>
-	</form>
+	<div class="container text-center">
+		<br><br><br><br>
+		<h1>Assessment</h1>
+		<form id="assessment-form">
+				{{#each answers}}
+					<div class="form-group">
+						{{add @index}}.
+						<input type="radio" name="q{{add @index}}" value="A">A
+						<input type="radio" name="q{{add @index}}" value="B">B
+						<input type="radio" name="q{{add @index}}" value="C">C
+						<input type="radio" name="q{{add @index}}" value="D">D
+						<input type="radio" name="q{{add @index}}" value="E">E
+					</div>
+				{{/each}}
+			<button class="assessment-button" type="submit">Submit Assessment</button>
+		</form>
+	</div>
 </template>

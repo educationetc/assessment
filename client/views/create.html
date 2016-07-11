@@ -1,25 +1,28 @@
 <template name="create">
-	<form id="new-assessment">
-		<label>Questions</label>
-		{{#each questions}}
+	<div class="container text-center">
+		<br><br><br><br>
+		<h2>Create Assessment</h2>
+		<form id="new-assessment">
+			{{#each questions}}
+				<div class="form-group">
+					{{add @index}}.
+					<input type="radio" name="q{{add @index}}" value="A" required> A
+					<input type="radio" name="q{{add @index}}" value="B" required> B
+					<input type="radio" name="q{{add @index}}" value="C" required> C
+					<input type="radio" name="q{{add @index}}" value="D" required> D
+					<input type="radio" name="q{{add @index}}" value="E" required> E
+				</div>
+			{{/each}}
+			<button id="add-question" class="assessment-button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+			<button id="remove-question" class="assessment-button"><i class="fa fa-minus" aria-hidden="true"></i></button>
+			<br><br>
 			<div class="form-group">
-				{{add @index}}.
-				<input type="radio" name="q{{add @index}}" value="A" required>
-				<input type="radio" name="q{{add @index}}" value="B" required>
-				<input type="radio" name="q{{add @index}}" value="C" required>
-				<input type="radio" name="q{{add @index}}" value="D" required>
-				<input type="radio" name="q{{add @index}}" value="E" required>
+				<input name="name" class="assessment-input" placeholder="Assessment Name">
 			</div>
-		{{/each}}
-		<button id="add-question"><i class="fa fa-plus" aria-hidden="true"></i></button>
-		<br><br>
-		<div class="form-group">
-			<label>Name</label>
 			<br>
-			<input name="name" placeholder="Trig Functions Assessment">
-		</div>
-		<br>
 
-		<button type="submit">Submit c:</button>
-	</form>
+			<button class="assessment-button" type="submit">Submit c:</button>
+		</form>
+		<br><br>
+	</div>
 </template>
