@@ -34,10 +34,10 @@ function checkToken(token) {
 	if (!test)
 		return $('#error').text('Test not found');
 
+	Session.set('token', test.token);
+
 	$('#error').text('');
 	$('#success').text('Test found!');
-
-	Session.set('token', test.token);
 
 	$('#id').show();
 	$('#token-form').attr('id', 'student-id-form');

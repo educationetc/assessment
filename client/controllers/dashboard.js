@@ -19,7 +19,7 @@ Router.route('/dashboard', function() {
 Template.dashboard.helpers({
 	tests() {
 		tests.forEach(t => {
-			var scores = Scores.find({token: t.token});
+			var scores = Scores.find({testId: t._id});
 			if(!scores)
 				return;
 
