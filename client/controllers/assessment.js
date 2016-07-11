@@ -1,7 +1,7 @@
 import { Tests } from '../../mongo/tests.js';
 import { Scores } from '../../mongo/scores.js';
 
-var test;
+var test, answers;
 
 Router.route('/:token/t', function() {
 
@@ -13,7 +13,18 @@ Router.route('/:token/t', function() {
 	if (!test)
 		return BlazeLayout.render('app', {content: 'home', error: 'Test not found', token: this.params.token});
 
-	BlazeLayout.render('app', {content: 'assessment', answers: new Array(test.answers.length)});
+	answers = new Array(test.answers.length);
+
+	Scores.insert({
+		token: Session.get('token'),
+		studentId: Session.get('student-id'),
+		answers: answers,
+		percentage: 0,
+		numCorrect: 0,
+		createdAt: 0
+	});
+
+	BlazeLayout.render('app', {content: 'assessment', answers: answers});
 })
 
 Template.assessment.events({
@@ -44,13 +55,18 @@ Template.assessment.events({
 
 		window.removeEventListener('blur', noCheating);
 
-		Scores.insert({
-			token: Session.get('token'),
-			studentId: Session.get('student-id'),
-			answers: answers,
-			percentage: percentage,
-			numCorrect: numCorrect,
-			createdAt: Date.now()
+		Scores.update(
+			{
+				token: Session.get('token'),
+				studentId: Session.get('student-id')
+			},
+
+			{
+				answers: answers,
+				percentage: percentage,
+				numCorrect: numCorrect,
+				createdAt: Date.now()
+			}
 		});
 
 		BlazeLayout.render('app', {content: 'results', percentage: percentage, numCorrect: numCorrect, length: length});

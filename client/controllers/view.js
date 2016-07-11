@@ -5,8 +5,6 @@ Router.route('/:token/view', function () {
 
 	var test = Tests.findOne({token: this.params.token});
 
-	console.log(Meteor.user());
-
 	if (!Meteor.user() || !test || test.admin !== Meteor.userId())
 		return BlazeLayout.render('app', {content: '404'});
 
