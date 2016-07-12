@@ -3,19 +3,30 @@ import { Tests } from '../../mongo/tests.js';
 
 var test;
 
-Router.route('/:testId/view', function () {
+Router.route('/:testId/view', {
 
-	test = Tests.findOne({_id: this.params.testId});
+	subscriptions: function () {
+		return [Meteor.subscribe('tests'), Meteor.subscribe('scores')];
+	},
 
-	if (!Meteor.user() || !test || test.admin !== Meteor.userId())
-		return BlazeLayout.render('app', {content: '404'});
+	action: function () {
+		if (this.ready()) {
+			test = Tests.findOne({_id: this.params.testId});
 
-	var scores = Scores.find({testId: this.params.testId}).fetch();
+			if (!Meteor.user() || !test || test.admin !== Meteor.userId())
+				return BlazeLayout.render('app', {content: '404'});
 
-	if (scores.length === 0)
-		return BlazeLayout.render('app', {content: 'view', error: 'No scores found'});
+			var scores = Scores.find({testId: this.params.testId}).fetch();
 
-	BlazeLayout.render('app', {content: 'view', scores: scores});
+			if (scores.length === 0)
+				return BlazeLayout.render('app', {content: 'view', error: 'No scores found'});
+
+			BlazeLayout.render('app', {content: 'view', scores: scores});
+
+		} else {
+			BlazeLayout.render('app', {content: 'spinner'});
+		}
+	}
 });
 
 var omitted;

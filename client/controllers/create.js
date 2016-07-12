@@ -12,13 +12,20 @@ function generateId(int) {
 }
 
 /*	create route	*/
-Router.route('/create', function() {
-	if(!Meteor.user())
-		return BlazeLayout.render('app', {error: '404'});
+Router.route('/create', function () {
 
-	Session.set('questions', new Array(5));
-	BlazeLayout.render('app', {content: 'create'});
-})
+	this.wait(Meteor.subscribe('tests'));
+
+	if (this.ready()) {
+		if(!Meteor.user())
+			return BlazeLayout.render('app', {error: '404'});
+
+		Session.set('questions', new Array(5));
+		BlazeLayout.render('app', {content: 'create'});
+	} else {
+		BlazeLayout.render('app', {content: 'spinner'});
+	}
+});
 
 Template.create.events({
 	'click #add-question'(e) {

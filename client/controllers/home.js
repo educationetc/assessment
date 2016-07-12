@@ -1,6 +1,7 @@
 import { Tests } from '../../mongo/tests.js';
 
 Router.route('/', function () {
+	Meteor.subscribe('tests'); /* don't wait for the subscription because hopefully it will have loaded by the time they click, no need for a spinner */
 	BlazeLayout.render('app', {content: 'home'});
 });
 
@@ -22,8 +23,6 @@ Template.home.events({
 			return $('#error').text('Please enter student id');
 
 		Session.set('student-id', id);
-
-		console.log('lah');
 
 		Router.go('/' + Session.get('token') + '/t');
 	},

@@ -3,18 +3,29 @@ import { Scores } from '../../mongo/scores.js';
 
 var tests;
 
-Router.route('/dashboard', function() {
+Router.route('/dashboard', {
 
-	if(!Meteor.user())
-		return BlazeLayout.render('app', {content: '404'});
+	subscriptions: function() {
+    	return [Meteor.subscribe('scores'), Meteor.subscribe('tests')];
+  	},
 
-	/*	find user's authored tests	*/
-	tests = Tests.find({admin: Meteor.userId()}, {sort: {createdAt: -1}})
+  	action: function () {
+  		if (this.ready()) {
+  			if(!Meteor.user())
+				return BlazeLayout.render('app', {content: '404'});
 
-	tests = tests ? tests.fetch() : [];
+			/*	find user's authored tests	*/
+			tests = Tests.find({admin: Meteor.userId()}, {sort: {createdAt: -1}})
 
-	BlazeLayout.render('app', {content: 'dashboard', tests: tests});
-})
+			tests = tests ? tests.fetch() : [];
+
+			BlazeLayout.render('app', {content: 'dashboard', tests: tests});
+
+  		} else {
+    		BlazeLayout.render('app', {content: 'spinner'});
+		}
+	}
+});
 
 Template.dashboard.helpers({
 	tests() {

@@ -5,32 +5,40 @@ var test, /* the test object */
 	length, /* the length of the test */
 	id; /* the _id of the current student response in the scores collection */
 
-Router.route('/:token/t', function() {
+Router.route('/:token/t', {
 
-	test = Tests.findOne({token: this.params.token});
+	subscriptions: function () {
+		return [Meteor.subscribe('scores'), Meteor.subscribe('tests')];
+	},
 
-	if (!Session.get('student-id'))
-		return BlazeLayout.render('app', {content: 'home', token: this.params.token});
+	action: function () {
+		if (this.ready()) {
+			test = Tests.findOne({token: this.params.token});
 
-	if (!test)
-		return BlazeLayout.render('app', {content: 'home', error: 'Test not found', token: this.params.token});
+			if (!Session.get('student-id'))
+				return BlazeLayout.render('app', {content: 'home', token: this.params.token});
 
-	length = test.answers.length;
+			if (!test)
+				return BlazeLayout.render('app', {content: 'home', error: 'Test not found', token: this.params.token});
 
-	if (!isMissingId()) /* this test has already been created, avoid two db entries */
-		return;
+			length = test.answers.length;
 
-	Scores.insert({
-		testId: test._id,
-		studentId: Session.get('student-id'),
-		answers: (new Array(length)).fill('F'),
-		percentage: 0,
-		numCorrect: 0,
-		createdAt: 0
-	});
+			Scores.insert({
+				testId: test._id,
+				studentId: Session.get('student-id'),
+				answers: (new Array(length)).fill('F'),
+				percentage: 0,
+				numCorrect: 0,
+				createdAt: 0
+			});
 
-	BlazeLayout.render('app', {content: 'assessment', answers: new Array(length)});
-})
+			BlazeLayout.render('app', {content: 'assessment', answers: new Array(length)});
+		} else {
+			BlazeLayout.render('app', {content: 'spinner'});
+		}
+	}
+});
+
 
 Template.assessment.events({
 	'submit #assessment-form' (e) {
