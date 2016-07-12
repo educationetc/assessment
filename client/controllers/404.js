@@ -6,8 +6,6 @@ var errorImages = [
 
 Template['404'].helpers({
 	loadImg() {
-		console.log('hey');
-		console.log(errorImages[Math.round(Math.random() * errorImages.length)])
-		return errorImages[Math.round(Math.random() * errorImages.length)];
+		return errorImages[Math.round(Math.random() * (errorImages.length - 1))];
 	}
 })

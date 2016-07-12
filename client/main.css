@@ -34,12 +34,12 @@
 
 body {
 	min-height: 100vh;
-	/*animation-name: bgcolor;
+	animation-name: bgcolor;
     animation-duration: 20s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;    
-    animation-play-state: running;*/
-    background-color: #ff5050;
+    animation-play-state: running;
+    /*background-color: #ff5050;*/
     font-family: 'Ubuntu';
     position: relative;
 }

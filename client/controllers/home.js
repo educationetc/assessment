@@ -30,14 +30,26 @@ Template.home.events({
 function checkToken(token) {
 
 	var test = Tests.findOne({token: token});
+	var input = $('#assessment-input-id');
 
-	if (!test)
-		return $('#error').text('Test not found');
+	if (!test) {
+		input.addClass('animated shake');
+		input.css('border', '3px solid red');
+
+		setTimeout(() => {
+			input.css('border', '3px solid #e6e6e6');
+			input.removeClass('animated shake')
+		}, 1000);
+
+		return;
+	}
 
 	Session.set('token', test.token);
 
 	$('#error').text('');
-	$('#success').text('Test found!');
+	input.prop('disabled', true);
+	input.css('border', '3px solid #66ff99');
+	input.css('background-color', '#d9d9d9')
 
 	$('#id').show();
 	$('#token-form').attr('id', 'student-id-form');

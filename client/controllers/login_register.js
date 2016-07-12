@@ -12,7 +12,7 @@ Template.login.events({
 	'submit #login-form'(e) {
 		e.preventDefault();
 
-		var username 		= $('input[name="username"]').val(),
+		var email	 		= $('input[name="username"]').val(),
 			password		= $('input[name="password"]').val();
 
 		Meteor.loginWithPassword(username, password, function(err) {
@@ -28,7 +28,7 @@ Template.register.events({
 	'submit #register-form'(e) {
 		e.preventDefault();
 
-		var username 		= $('input[name="username"]').val(),
+		var email 			= $('input[name="email"]').val(),
 			firstName 		= $('input[name="first-name]').val(),
 			lastName		= $('input[name="last-name]').val(),
 			password		= $('input[name="password"]').val(),
@@ -38,7 +38,7 @@ Template.register.events({
 			return $('#error').text('Passwords do not match.')
 
 		var options = {
-			username: username,
+			email: email,
 			password: password,
 			profile: {
 				firstName: firstName,

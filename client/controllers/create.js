@@ -70,5 +70,9 @@ Template.create.events({
 Template.create.helpers({
 	questions() {
 		return Session.get('questions');
+	},
+
+	add(int) {
+		return int + 1;
 	}
 })

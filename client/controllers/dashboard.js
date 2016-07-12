@@ -36,5 +36,9 @@ Template.dashboard.helpers({
 		})
 
 		return tests;
-	}
+	},
+
+	add(int) {
+		return int + 1;
+	} 
 })
