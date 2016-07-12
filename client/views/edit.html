@@ -4,14 +4,21 @@
 		<h2>Edit Assessment</h2>
 		<form id="new-assessment">
 			{{#each questions}}
-				<div class="form-group">
-					{{add @index}}.
-					<input type="radio" name="q{{add @index}}" value="A" required> A
-					<input type="radio" name="q{{add @index}}" value="B" required> B
-					<input type="radio" name="q{{add @index}}" value="C" required> C
-					<input type="radio" name="q{{add @index}}" value="D" required> D
-					<input type="radio" name="q{{add @index}}" value="E" required> E
-				</div>
+					<div class="img-radio-form">
+						<div class="form-group">
+							{{add @index}}.
+							<input id="A{{add @index}}" type="radio" name="q{{add @index}}" value="A" />
+							<label class="img-radio A" for="A{{add @index}}"></label>
+      		  				<input id="B{{add @index}}" type="radio" name="q{{add @index}}" value="B" />
+        					<label class="img-radio B" for="B{{add @index}}"></label>
+        					<input id="C{{add @index}}" type="radio" name="q{{add @index}}" value="C" />
+							<label class="img-radio C" for="C{{add @index}}"></label>
+        					<input id="D{{add @index}}" type="radio" name="q{{add @index}}" value="D" />
+        					<label class="img-radio D" for="D{{add @index}}"></label>
+        					<input id="E{{add @index}}" type="radio" name="q{{add @index}}" value="E" />
+							<label class="img-radio E" for="E{{add @index}}"></label>
+						</div>
+					</div>
 			{{/each}}
 			<button id="add-question" class="assessment-button"><i class="fa fa-plus" aria-hidden="true"></i></button>
 			<button id="remove-question" class="assessment-button"><i class="fa fa-minus" aria-hidden="true"></i></button>
