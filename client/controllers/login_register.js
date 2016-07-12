@@ -1,11 +1,23 @@
 import { Accounts } from 'meteor/accounts-base';
 
 Router.route('/login', function() {
+	if(Meteor.user())
+		return Router.go('/dashboard');
+
 	BlazeLayout.render('app', {content: 'login'});
 })
 
 Router.route('/register', function() {
+	if(Meteor.user())
+		return Router.go('/dashboard');
+
 	BlazeLayout.render('app', {content: 'register'});
+})
+
+Router.route('/logout', function() {
+	Meteor.logout();
+	
+	Router.go('/');
 })
 
 Template.login.events({
