@@ -6,6 +6,10 @@
 				{{#each answers}}
 					<div class="form-group">
 						{{add @index}}.
+						<label>
+							<input type="radio" name="q{{add @index}}" value="A" hidden>
+							<img src="http://www.freedigitalphotos.net/images/img/homepage/87357.jpg"/>
+						</label>
 						<input type="radio" name="q{{add @index}}" value="A">A
 						<input type="radio" name="q{{add @index}}" value="B">B
 						<input type="radio" name="q{{add @index}}" value="C">C
