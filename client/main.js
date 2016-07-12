@@ -27,6 +27,10 @@ Users
 ------------ /schemas -----------
 */
 
+Router.route('/about', function() {
+	BlazeLayout.render('app', {content: 'about'});
+})
+
 Template.registerHelper('add', (int) => int + 1)
 Template.registerHelper('session', (key) => Session.get(key));
 

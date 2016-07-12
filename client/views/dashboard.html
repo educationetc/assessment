@@ -6,26 +6,24 @@
 		<br><br><br><br>
 		<table class="table table-striped">
 			<thead>
-				<th>#</th>
+				<th>Token</th>
 				<th>Name</th>
 				<th>Tests</th>
 				<th>Avg</th>
 				<th>Date Created</th>
 				<th>View</th>
 				<th>Edit</th>
-				<th>Copy</th>
 			</thead>
 			<tbody>
 				{{#each tests}}
 					<tr>
-						<td>{{add @index}}</td>
+						<td>{{ this.token }}</td>
 						<td>{{ this.name }}</td>
 						<td>{{ this.scores.length }}</td>
 						<td>{{ this.avg }}</td>
 						<td>{{ this.createdAt }}</td>
 						<td><a href="/{{ this._id }}/view">view</a></td>
 						<td>edit</td>
-						<td>copy</td>
 					</tr>
 				{{/each}}
 			</tbody>

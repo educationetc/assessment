@@ -1,8 +1,11 @@
-Router.route('/edit', function() {
+import { Tests } from '../../mongo/tests.js';
+
+Router.route('/:testId/edit', function() {
 	if(!Meteor.user())
 		return BlazeLayout.render('app', {error: '404'});
 
-	var test = Tests.findOne({admin: Meteor.userId()});
+	var test = Tests.findOne({_id: this.params.testId});
+	console.log(test)
 
 	/*	validate test	*/
 	if(!test)
@@ -12,5 +15,17 @@ Router.route('/edit', function() {
 	if(test.admin !== Meteor.userId())
 		return BlazeLayout.render('app', {content: '404'});
 
-	BlazeLayout.render('app', {content: 'asessment', test: test});
+	Session.set('questions', test.answers);
+
+	BlazeLayout.render('app', {content: 'edit', test: test});
+})
+
+Template.edit.helpers({
+	questions() {
+		return Session.get('questions');
+	},
+
+	add(int) {
+		return int + 1;
+	}
 })

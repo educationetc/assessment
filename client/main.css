@@ -104,3 +104,13 @@ footer ul li {
 	border: 3px solid #cc0000;
 	width: 120px;
 }
+
+footer a {
+	text-decoration: none !important;
+	color: white;
+	transition: color 0.2s ease;
+}
+
+footer a:hover {
+	color: #d9d9d9;
+}
