@@ -8,7 +8,7 @@
 }
 
 /* CSS declarations go here */
-@keyframes bgcolor {
+/*@keyframes bgcolor {
 	0% {
 	    background-color: #45a3e5;
 	}
@@ -30,7 +30,7 @@
 	100% {
 	    background-color: #864cbf;
 	}
-}
+}*/
 
 body {
 	min-height: 100vh;
@@ -39,7 +39,7 @@ body {
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;    
     animation-play-state: running;
-    /*background-color: #ff5050;*/
+    background-color: #ff5050;
     font-family: 'Ubuntu';
     position: relative;
 }
