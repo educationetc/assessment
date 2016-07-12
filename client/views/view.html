@@ -1,7 +1,6 @@
 <template name="view">
 	<table class="table">
 		<tr>	
-			<th>#</th>
 			<th>Student ID</th>
 			<th>Score</th>
 			<th>Percentage</th> 
@@ -10,7 +9,6 @@
 		</tr>
 		{{#each scores}}
 		<tr>
-			<td>{{add @index}}</td>
 			<td>{{this.studentId}}</td>
 			<td>{{buildScoreString this}}</td>
 			<td>{{this.percentage}}%{{#if isInProgress this}} (in progress){{/if}}</td>
