@@ -6,7 +6,6 @@
 		<br><br><br><br>
 		<table class="table table-striped">
 			<thead>
-				<th>#</th>
 				<th>Name</th>
 				<th>Tests</th>
 				<th>Avg</th>
@@ -18,7 +17,6 @@
 			<tbody>
 				{{#each tests}}
 					<tr>
-						<td>{{add @index}}</td>
 						<td>{{ this.name }}</td>
 						<td>{{ this.scores.length }}</td>
 						<td>{{ this.avg }}</td>
