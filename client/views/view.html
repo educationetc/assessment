@@ -6,14 +6,24 @@
 			<th>Score</th>
 			<th>Percentage</th> 
 			<th>Date Taken</th>
+			<th>Responses</th>
 		</tr>
 		{{#each scores}}
 		<tr>
 			<td>{{add @index}}</td>
-			<td>{{this.studentId}}</td> 
-			<td>{{this.numCorrect}} out of {{this.answers.length}}</td>
-			<td>{{this.percentage}}%</td>
+			<td>{{this.studentId}}</td>
+			<td>{{buildScoreString this}}</td>
+			<td>{{this.percentage}}%{{#if isInProgress this}} (in progress){{/if}}</td>
 			<td>{{date this.createdAt}}</td>
+			<td>
+				<ul style="height:40px;width:100px;overflow:scroll;display:inline;">
+					{{#each this.answers}}
+						{{#if isntF this}}
+							<li class="btn btn-primary btn-sm btns" style="background-color:{{color this @index}};">{{this}}</li>
+						{{/if}}
+					{{/each}}
+				</ul>
+			</td>
 		</tr>
 		{{/each}}
 	</table>
