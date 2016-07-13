@@ -1,28 +1,38 @@
 <template name="view">
-	<table class="table">
-		<tr>	
-			<th>Student ID</th>
-			<th>Score</th>
-			<th>Percentage</th> 
-			<th>Date Taken</th>
-			<th>Responses</th>
-		</tr>
-		{{#each scores}}
-		<tr>
-			<td>{{this.studentId}}</td>
-			<td>{{buildScoreString this}}</td>
-			<td>{{this.percentage}}%{{#if isInProgress this}} (in progress){{/if}}</td>
-			<td>{{date this.createdAt}}</td>
-			<td>
-				<ul style="height:40px;width:100px;overflow:scroll;display:inline;">
-					{{#each this.answers}}
-						{{#if isntF this}}
-							<li class="btn btn-primary btn-sm btns" style="background-color:{{color this @index}};">{{this}}</li>
-						{{/if}}
-					{{/each}}
-				</ul>
-			</td>
-		</tr>
-		{{/each}}
-	</table>
+	<br><br><br>
+	<div class="container">
+		<h2>Assessment: {{ test.name }}</h2>
+		<h4>Token: {{ test.token }}</h4>
+		<table class="table table-striped">
+			<thead>
+				<tr>	
+					<th>Student ID</th>
+					<th>Score</th>
+					<th>Percentage</th> 
+					<th>Date Taken</th>
+					<th>Responses</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each scores}}
+				<tr>
+					<td>{{this.studentId}}</td>
+					<td>{{buildScoreString this}}</td>
+					<td>{{this.percentage}}%</td>
+					<td>{{from this.createdAt}}</td>
+					<td>
+						<ul style="height:40px;width:100px;overflow:scroll;display:inline;">
+							{{#each this.answers}}
+								{{#if isntF this}}
+									<li class="btn btn-primary btn-sm btns" style="background-color:{{color this @index}};">{{this}}</li>
+								{{/if}}
+							{{/each}}
+						</ul>
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+	<br><br><br>
 </template>

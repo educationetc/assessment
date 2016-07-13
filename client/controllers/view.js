@@ -6,7 +6,7 @@ var test;
 Router.route('/:testId/view', {
 
 	subscriptions: function () {
-		return [Meteor.subscribe('tests'), Meteor.subscribe('scores')];
+		return [Meteor.subscribe('tests'), Meteor.subscribe('scores', this.params.testId)];
 	},
 
 	action: function () {
@@ -21,15 +21,13 @@ Router.route('/:testId/view', {
 			if (scores.length === 0)
 				return BlazeLayout.render('app', {content: 'view', error: 'No scores found'});
 
-			BlazeLayout.render('app', {content: 'view', scores: scores});
+			BlazeLayout.render('app', {content: 'view', scores: scores, test: test});
 
 		} else {
 			BlazeLayout.render('app', {content: 'spinner'});
 		}
 	}
 });
-
-var omitted;
 
 Template.view.helpers({
 	date (date) {
@@ -45,7 +43,7 @@ Template.view.helpers({
 	},
 
 	buildScoreString (score) {
-		omitted = 0;
+		var omitted = 0;
 
 		$.each(score.answers, function (index, value) {
 			if (value === 'F') omitted++;
@@ -53,9 +51,5 @@ Template.view.helpers({
 
 		return score.numCorrect + ' out of ' + (score.answers.length - omitted) + ((omitted > 0) ? (' (' + omitted + ' yet to answer)') : '');
 
-	},
-
-	isInProgress(score) {
-		return omitted > 0;
 	}
 });

@@ -17,6 +17,7 @@ Router.route('/register', function() {
 Router.route('/logout', function() {
 	Meteor.logout();
 	
+	success('Logged out successfully.')
 	Router.go('/');
 })
 
@@ -29,8 +30,9 @@ Template.login.events({
 
 		Meteor.loginWithPassword(email, password, function(err) {
 			if(err)
-				return $('#error').text(err);
+				return error(err);
 
+			success('Logged in successfully.');
 			Router.go('/dashboard');
 		});
 	}
@@ -47,7 +49,7 @@ Template.register.events({
 			confirmPassword	= $('input[name="confirm-password"]').val();
 
 		if(password !== confirmPassword)
-			return $('#error').text('Passwords do not match.')
+			return error('Passwords do not match.')
 
 		var options = {
 			email: email,
@@ -60,8 +62,9 @@ Template.register.events({
 
 		Accounts.createUser(options, function(err) {
 			if(err)
-				return $('#error').text(err);
+				return error(err);
 
+			success('Registed successfully.')
 			Router.go('/dashboard');
 		});
 	}

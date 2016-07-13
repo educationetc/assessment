@@ -7,8 +7,6 @@
 
 <template name="app">
 	<body>
-		<div id="success">{{success}}</div>
-		<div id="error">{{error}}</div>
 		<div>
 			{{> Template.dynamic template=content}}
 		</div>
@@ -25,11 +23,14 @@
             <li>•</li>
             <li><a href="/register">Register</a></li>
   				{{/if}}
-  				<li>•</li>
-  				<li>About</li>
+  				<!-- <li>•</li> -->
+  				<!-- <li>About</li> -->
   			</ul>
   			<span style="font-size: 16px"><a href="/">Assessment</a></span>
   			<br>
   		</footer>
+
+      <div id="error" class="text-center"></div>
+      <div id="success" class="text-center"></div>
 	</body>
 </template>

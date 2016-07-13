@@ -33,6 +33,39 @@ Router.route('/about', function() {
 
 Template.registerHelper('add', (int) => int + 1)
 Template.registerHelper('session', (key) => Session.get(key));
+Template.registerHelper('from', (time) => {
+	if(time === 0)
+		return 'Currently in progress'
+
+	var t = Date.now() - time
+		, s = t / 1000
+		, str = '';
+
+	if(s / 86400 > 1)
+		str = (~~(s/86400)) + ' days ago'
+	else if(s / 3600 > 1)
+		str = (~~(s / 3600)) + ' hours ago'
+	else if(s / 60)
+		str = (~~(s / 60)) + ' minutes ago'
+	else
+		str = s + ' seconds ago'
+
+	return str;
+})
+
+error = function(msg) {
+	$('#error').fadeIn(1000);
+	$('#error').text(msg);
+
+	setTimeout(() => $('#error').fadeOut(1000), 2000);
+}
+
+success = function(msg) {
+	$('#success').fadeIn(1000);
+	$('#success').text(msg);
+
+	setTimeout(() => $('#success').fadeOut(1000), 2000);
+}
 
 var errorImages = [
 	'http://crajun.com/wp-content/uploads/2014/10/morpheus_meme.jpg',

@@ -1,30 +1,12 @@
 import { Tests } from '../../mongo/tests.js';
 
-var key = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-function generateId(int) {
-	var str = '';
-
-	for(var j = 0; j < int; j++)
-		str += key[Math.floor(Math.random() * key.length)];
-
-	return str;
-}
-
 /*	create route	*/
 Router.route('/create', function () {
+	if(!Meteor.user())
+		return BlazeLayout.render('app', {error: '404'});
 
-	this.wait(Meteor.subscribe('tests'));
-
-	if (this.ready()) {
-		if(!Meteor.user())
-			return BlazeLayout.render('app', {error: '404'});
-
-		Session.set('questions', new Array(5));
-		BlazeLayout.render('app', {content: 'create'});
-	} else {
-		BlazeLayout.render('app', {content: 'spinner'});
-	}
+	Session.set('questions', new Array(5));
+	BlazeLayout.render('app', {content: 'create'});
 });
 
 Template.create.events({
@@ -54,23 +36,25 @@ Template.create.events({
 			name 		= $('input[name="name"]').val();
 
 		if(!name)
-			return $('#error').text('Please name your test.');
+			return error('Please name your test.');
 
 		for (var i = 1; i < length + 1; i++)
 			answers += $('input[name="q' + i + '"]:checked').val();
 
 		if (answers.includes('undefined'))
-			return $('#error').text('Please fill out entire assessment');
+			return error('Please fill out entire assessment');
 
-		Tests.insert({
-			token: generateId(6),
-			admin: Meteor.userId(),
+		var options = {
 			name: name,
-			answers: answers.split(''),
-			createdAt: Date.now()
-		});
+			answers: answers.split('')
+		}
 
-		Router.go('/dashboard');
+		Meteor.call('insertTest', options, function(err, res) {
+			if(err)
+				return error(err);
+
+			Router.go('/dashboard');
+		})
 	}
 })
 
