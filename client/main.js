@@ -34,6 +34,13 @@ Router.route('/about', function() {
 Template.registerHelper('add', (int) => int + 1)
 Template.registerHelper('session', (key) => Session.get(key));
 
+function error(err) {
+	$('#error').fadeIn(1000);
+	$('#error-msg').text(err);
+
+	setTimeout(() => $('#error').fadeOut(1000), 2000);
+}
+
 var errorImages = [
 	'http://crajun.com/wp-content/uploads/2014/10/morpheus_meme.jpg',
 	'http://s.quickmeme.com/img/a8/a8022006b463b5ed9be5a62f1bdbac43b4f3dbd5c6b3bb44707fe5f5e26635b0.jpg',

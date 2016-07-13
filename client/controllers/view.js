@@ -13,9 +13,9 @@ Router.route('/:testId/view', function () {
 	var scores = Scores.find({testId: this.params.testId}).fetch();
 
 	if (scores.length === 0)
-		return BlazeLayout.render('app', {content: 'view', error: 'No scores found'});
-
-	BlazeLayout.render('app', {content: 'view', scores: scores});
+		return BlazeLayout.render('app', {content: 'view', error: 'No scores found', test: test});
+	
+	BlazeLayout.render('app', {content: 'view', scores: scores, test: test});
 });
 
 var omitted;

@@ -12,8 +12,10 @@ Router.route('/:token/t', function() {
 	if (!Session.get('student-id'))
 		return BlazeLayout.render('app', {content: 'home', token: this.params.token});
 
-	if (!test)
-		return BlazeLayout.render('app', {content: 'home', error: 'Test not found', token: this.params.token});
+	if (!test) {
+		error('Test not found.')
+		return BlazeLayout.render('app', {content: 'home', token: this.params.token});
+	}
 
 	length = test.answers.length;
 

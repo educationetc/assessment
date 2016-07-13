@@ -114,3 +114,14 @@ footer a {
 footer a:hover {
 	color: #d9d9d9;
 }
+
+#error {
+	display: none;
+	height: 60px;
+	background-color: #ffcc66;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	z-index: 3000;
+	box-shadow: 0px 5px 20px 0px black;
+}
