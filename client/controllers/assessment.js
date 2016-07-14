@@ -75,7 +75,7 @@ Template.assessment.events({
 			if(err)
 				return error(err);
 
-			delete Session.keys; /* if student-id key remains defined, assessment can be retaken */
+			Session.keys = {}; /* if student-id key remains defined, assessment can be retaken */
 
 			Router.go('/');
 
