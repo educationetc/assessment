@@ -54,5 +54,24 @@ Template.view.helpers({
 
 	buildStatusString (score) {
 		return score.createdAt === 0 ? 'In progress' : score.createdAt === -1 ? 'Potentially Cheating (Exited Assessment)' : 'Completed ' + from(score.createdAt);
+	},
+
+	getName(studentId) {
+		return ref[parseInt(studentId)];
 	}
 });
+
+var ref = {
+	18665: 'Bailey, Devon',
+	57926: 'Baye-Ellison, Zayd',
+	18675: 'Carri, Anthony',
+	54623: 'Dawes, Xavier',
+	57716: 'Evangelist, Kara',
+	18512: 'Evans, Reid',
+	20074: 'Garrett, Joshua',
+	52725: 'Godbold, Sean',
+	19003: 'Ives, Jill',
+	51436: 'Marshall, Stephanie',
+	41906: 'Rosalva, Michael',
+	17927: 'Senecal, Joshua'
+}

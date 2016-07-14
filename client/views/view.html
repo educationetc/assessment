@@ -6,7 +6,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>	
-					<th>Student ID</th>
+					<th>Name</th>
 					<th>Score</th>
 					<th>Percentage</th> 
 					<th>Status</th>
@@ -16,7 +16,7 @@
 			<tbody>
 				{{#each scores}}
 				<tr>
-					<td>{{this.studentId}}</td>
+					<td>{{getName this.studentId}}</td>
 					<td>{{buildScoreString this}}</td>
 					<td>{{this.percentage}}%</td>
 					<td>{{buildStatusString this}}</td>
