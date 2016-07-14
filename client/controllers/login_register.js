@@ -5,20 +5,21 @@ Router.route('/login', function() {
 		return Router.go('/dashboard');
 
 	BlazeLayout.render('app', {content: 'login'});
-})
+});
 
 Router.route('/register', function() {
 	if(Meteor.user())
 		return Router.go('/dashboard');
 
 	BlazeLayout.render('app', {content: 'register'});
-})
+});
 
 Router.route('/logout', function() {
 	Meteor.logout();
 	
+	success('Logged out successfully.')
 	Router.go('/');
-})
+});
 
 Template.login.events({
 	'submit #login-form'(e) {
@@ -29,12 +30,13 @@ Template.login.events({
 
 		Meteor.loginWithPassword(email, password, function(err) {
 			if(err)
-				return $('#error').text(err);
+				return error(err);
 
+			success('Logged in successfully.');
 			Router.go('/dashboard');
 		});
 	}
-})
+});
 
 Template.register.events({
 	'submit #register-form'(e) {
@@ -47,7 +49,7 @@ Template.register.events({
 			confirmPassword	= $('input[name="confirm-password"]').val();
 
 		if(password !== confirmPassword)
-			return $('#error').text('Passwords do not match.')
+			return error('Passwords do not match.')
 
 		var options = {
 			email: email,
@@ -60,9 +62,10 @@ Template.register.events({
 
 		Accounts.createUser(options, function(err) {
 			if(err)
-				return $('#error').text(err);
+				return error(err);
 
+			success('Registed successfully.')
 			Router.go('/dashboard');
 		});
 	}
-})
+});

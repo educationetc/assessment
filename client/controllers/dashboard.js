@@ -4,41 +4,52 @@ import { Scores } from '../../mongo/scores.js';
 var tests;
 
 Router.route('/dashboard', function() {
+	BlazeLayout.render('app', {content: 'spinner'});
 
 	if(!Meteor.user())
 		return BlazeLayout.render('app', {content: '404'});
 
-	/*	find user's authored tests	*/
-	tests = Tests.find({admin: Meteor.userId()}, {sort: {createdAt: -1}})
+	Meteor.call('getOwnedTests', function(err, res) {
 
-	tests = tests ? tests.fetch() : [];
 
-	BlazeLayout.render('app', {content: 'dashboard', tests: tests});
-})
+		if (err)
+			return error(err);
+
+		tests = res;
+
+		var j = 0;
+
+		populate();
+
+		function populate() {
+			if(j === tests.length) 
+				return BlazeLayout.render('app', {content: 'dashboard', tests: tests});
+
+			Meteor.call('getScores', tests[j]._id, function(err, res) {
+				if (!res) {
+					j++;
+					return populate();
+				}
+
+				var sum = 0;
+
+				res.forEach(s => sum += s.percentage);
+
+				var avg = ~~(sum / res.length) + '%';
+
+				tests[j].avg = avg ? avg : 0;
+				tests[j].scores = res;
+
+				j++;
+				populate();
+			});
+			
+		}
+	});
+});
 
 Template.dashboard.helpers({
-	tests() {
-		tests.forEach(t => {
-			var scores = Scores.find({testId: t._id});
-			if(!scores)
-				return;
-
-			scores 			= scores.fetch();
-			var sum 		= 0;
-
-			scores.forEach(s => sum += s.percentage);
-
-			var avg 		= ~~(sum / scores.length) + '%';
-
-			t.avg 			= avg ? avg : 0;
-			t.scores 		= scores;
-			t.createdAt		= (new Date(t.createdAt)).toString().split(' ').slice(0, 4).join(' ');
-		})
-
-		return tests;
-	},
-
 	add(int) {
 		return int + 1;
-	} 
-})
+	}
+});

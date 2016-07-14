@@ -1,6 +1,7 @@
 import { Tests } from '../../mongo/tests.js';
 
 Router.route('/', function () {
+	Meteor.subscribe('tests'); /* don't wait for the subscription because hopefully it will have loaded by the time they click, no need for a spinner */
 	BlazeLayout.render('app', {content: 'home'});
 });
 
@@ -12,9 +13,6 @@ Template.home.events({
 
 	'submit #student-id-form' (e) {
 		e.preventDefault();
-
-		$('#success').text('');
-		$('#error').text('');
 
 		var id = $('input[name="student-id"]').val();
 
@@ -31,44 +29,55 @@ Template.home.events({
 		Session.set('student-id', id);
 		Session.set('student-name', ref[id]);
 
+<<<<<<< HEAD
+=======
+		console.log('going...')
+
+>>>>>>> 67b86ea54d457eb1be972c1276d090cb485322c8
 		Router.go('/' + Session.get('token') + '/t');
 	},
 });
 
-function error(err) {
-	$('#error').fadeIn(1000);
-	$('#error-msg').text(err);
+// function error(err) {
+// 	$('#error').fadeIn(1000);
+// 	$('#error').text(err);
 
-	setTimeout(() => $('#error').fadeOut(1000), 2000);
-}
+// 	setTimeout(() => $('#error').fadeOut(1000), 2000);
+// }
 
 function checkToken(token) {
 
-	var test = Tests.findOne({token: token});
-	var input = $('#assessment-input-id');
+	Meteor.call('getTest', token, function(err, res) {
+		
+		if (err)
+			return error(err);
 
-	if (!test) {
-		input.addClass('animated shake');
-		input.css('border', '3px solid red');
-		error('Test not found.')
+		var input = $('#assessment-input-id');
 
-		setTimeout(() => {
-			input.css('border', '3px solid #e6e6e6');
-			input.removeClass('animated shake')
-		}, 1000);
+		if (!res) {
+			input.addClass('animated shake');
+			input.css('border', '3px solid red');
+			error('Test not found.');
+	
+			setTimeout(() => {
+				input.css('border', '3px solid #e6e6e6');
+				input.removeClass('animated shake')
+			}, 1000);
+	
+			return;
+		}
 
-		return;
-	}
-
-	Session.set('token', test.token);
-
-	$('#error').text('');
-	input.prop('disabled', true);
-	input.css('border', '3px solid #66ff99');
-	input.css('background-color', '#d9d9d9')
-
-	$('#id').show();
-	$('#token-form').attr('id', 'student-id-form');
+		success('Test found.');
+		Session.set('token', token);
+	
+		input.prop('disabled', true);
+		input.css('border', '3px solid #66ff99');
+		input.css('background-color', '#d9d9d9')
+	
+		$('#id').show();
+		$('#token-form').attr('id', 'student-id-form');
+	});
+	
 }
 
 var ref = {
@@ -84,4 +93,4 @@ var ref = {
 	51436: 'Marshall, Stephanie',
 	41906: 'Rosalva, Michael',
 	17927: 'Senecal, Joshua'
-};
+}

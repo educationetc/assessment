@@ -6,33 +6,49 @@ var test, /* the test object */
 	id; /* the _id of the current student response in the scores collection */
 
 Router.route('/:token/t', function() {
+	BlazeLayout.render('app', {content: 'spinner'});
 
-	test = Tests.findOne({token: this.params.token});
+	var token = this.params.token;
 
-	if (!Session.get('student-id'))
-		return BlazeLayout.render('app', {content: 'home', token: this.params.token});
+	Meteor.call('getTest', this.params.token, function(err, res) {
+		if(err)
+			return error(err);
 
-	if (!test) {
-		error('Test not found.')
-		return BlazeLayout.render('app', {content: 'home', token: this.params.token});
-	}
+		test = res;
 
-	length = test.answers.length;
+		if (!test) {
+			error('Test not found.');
+			Session.set('assessment-id-back', token);
+			return Router.go('/');
+		}
 
-	if (!isMissingId()) /* this test has already been created, avoid two db entries */
-		return;
+		if (!Session.get('student-id')) {
+			Session.set('assessment-id-back', token);
+			return Router.go('/');
+		}
 
-	Scores.insert({
-		testId: test._id,
-		studentId: Session.get('student-id'),
-		answers: (new Array(length)).fill('F'),
-		percentage: 0,
-		numCorrect: 0,
-		createdAt: 0
-	});
+		length = test.answers.length;
 
-	BlazeLayout.render('app', {content: 'assessment', answers: new Array(length)});
-})
+		var options = {
+			testId: test._id,
+			studentId: Session.get('student-id'),
+			answers: (new Array(length)).fill('F')
+		}
+
+		Meteor.call('insertScore', options, function(err, res) {
+			if(err)
+				return error(err);
+
+			Session.set('score-id', res._id);
+
+			console.log(res);
+			console.log(res._id)
+
+			BlazeLayout.render('app', {content: 'assessment', answers: new Array(length)});
+		})
+	})
+});
+
 
 Template.assessment.events({
 	'submit #assessment-form' (e) {
@@ -42,54 +58,43 @@ Template.assessment.events({
 		var res = processResponses(true);
 
 		if (!res)
-			return $('#error').text('Please fill out entire assessment');
+			return error('Please fill out entire assessment');
 
 		window.removeEventListener('blur', noCheating);
 
-		if (isMissingId())
-			return $('#error').text('Server connectivity lost');
-		$('#error').text('');
+		var options = {
+			_id: Session.get('score-id'),
+			answers: res.responses,
+			percentage: res.percentage,
+			total: res.total,
+			numCorrect: res.numCorrect,
+			createdAt: Date.now()
+		};
 
-		Scores.update(
-			{
-				_id: id
-			},
+		Meteor.call('updateScore', options, function(err, response) {
+			if(err)
+				return error(err);
 
-			{
-				$set: {
-					answers: res.responses,
-					percentage: res.percentage,
-					numCorrect: res.numCorrect,
-					createdAt: Date.now()
-				}
-			}
-		);
-
-		BlazeLayout.render('app', {content: 'results', percentage: res.percentage, numCorrect: res.numCorrect, length: length});
+			BlazeLayout.render('app', {content: 'results', percentage: res.percentage, numCorrect: res.numCorrect, length: length});
+		});
 	},
 
 	'change input' (e) {
 
 		var res = processResponses(false);
 
-		if (isMissingId())
-			return $('#error').text('Server connectivity lost');
-		$('#error').text('');
+		var options = {
+			_id: Session.get('score-id'),
+			answers: res.responses,
+			percentage: res.percentage,
+			total: res.total,
+			numCorrect: res.numCorrect
+		}
 
-		Scores.update(
-			{
-				_id: id
-			},
-
-			{
-				$set: {
-					answers: res.responses,
-					percentage: res.percentage,
-					total: res.total,
-					numCorrect: res.numCorrect
-				}
-			}
-		);
+		Meteor.call('updateScore', options, function(err, res) {
+			if(err)
+				return error(err);
+		});
 	}
 });
 
@@ -98,7 +103,7 @@ Template.assessment.onCreated(function () {
 });
 
 function noCheating() {
-    $('#error').text('Do not leave the page or your test will be voided');;
+    error('Do not leave the page or your test will be voided');;
 }
 
 function processResponses(mustBeCompleted) {
@@ -124,15 +129,4 @@ function processResponses(mustBeCompleted) {
 	percentage = Math.round(numCorrect / total * 100);
 
 	return {percentage: percentage, responses: responses, numCorrect: numCorrect};
-}
-
-function isMissingId() {
-	if (!id) {
-		id = Scores.findOne({testId: test._id, studentId: Session.get('student-id')});
-		if (id)
-			id = id._id;
-	}
-
-	if (!id)
-		return true;
 }

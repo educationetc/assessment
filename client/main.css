@@ -105,6 +105,43 @@ footer ul li {
 	width: 120px;
 }
 
+/*.img-radio-form input{
+    margin:0;padding:0;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+.A{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
+.B{background-image:url(http://i.imgur.com/SJbRQF7.png);}
+.C{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
+.D{background-image:url(http://i.imgur.com/SJbRQF7.png);}
+.E{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
+
+.img-radio-form input:active +.img-radio{opacity: .9;}
+.img-radio-form input:checked +.img-radio{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+.img-radio{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.img-radio:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}*/
+
 footer a {
 	text-decoration: none !important;
 	color: white;
@@ -115,13 +152,23 @@ footer a:hover {
 	color: #d9d9d9;
 }
 
-#error {
+#error, #success {
 	display: none;
 	height: 60px;
-	background-color: #ffcc66;
 	width: 100%;
 	position: absolute;
 	bottom: 0;
 	z-index: 3000;
 	box-shadow: 0px 5px 20px 0px black;
+	color: white;
+	text-align: center;
+	padding: 20px 0;
+}
+
+#error {
+	background-color: #ffcc66;
+}
+
+#success {
+	background-color: #33cc33;
 }

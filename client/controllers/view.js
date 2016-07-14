@@ -3,22 +3,31 @@ import { Tests } from '../../mongo/tests.js';
 
 var test;
 
-Router.route('/:testId/view', function () {
+Router.route('/:testId/view', {
 
-	test = Tests.findOne({_id: this.params.testId});
+	subscriptions: function () {
+		return [Meteor.subscribe('tests'), Meteor.subscribe('scores', this.params.testId)];
+	},
 
-	if (!Meteor.user() || !test || test.admin !== Meteor.userId())
-		return BlazeLayout.render('app', {content: '404'});
+	action: function () {
+		if (this.ready()) {
+			test = Tests.findOne({_id: this.params.testId});
 
-	var scores = Scores.find({testId: this.params.testId}).fetch();
+			if (!Meteor.user() || !test || test.admin !== Meteor.userId())
+				return BlazeLayout.render('app', {content: '404'});
 
-	if (scores.length === 0)
-		return BlazeLayout.render('app', {content: 'view', error: 'No scores found', test: test});
-	
-	BlazeLayout.render('app', {content: 'view', scores: scores, test: test});
+			var scores = Scores.find({testId: this.params.testId}).fetch();
+
+			if (scores.length === 0)
+				return BlazeLayout.render('app', {content: 'view', error: 'No scores found'});
+
+			BlazeLayout.render('app', {content: 'view', scores: scores, test: test});
+
+		} else {
+			BlazeLayout.render('app', {content: 'spinner'});
+		}
+	}
 });
-
-var omitted;
 
 Template.view.helpers({
 	date (date) {
@@ -34,7 +43,7 @@ Template.view.helpers({
 	},
 
 	buildScoreString (score) {
-		omitted = 0;
+		var omitted = 0;
 
 		$.each(score.answers, function (index, value) {
 			if (value === 'F') omitted++;
@@ -42,9 +51,5 @@ Template.view.helpers({
 
 		return score.numCorrect + ' out of ' + (score.answers.length - omitted) + ((omitted > 0) ? (' (' + omitted + ' yet to answer)') : '');
 
-	},
-
-	isInProgress(score) {
-		return omitted > 0;
 	}
 });

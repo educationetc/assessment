@@ -4,20 +4,24 @@
 		<h1>Assessment</h1>
 		<form id="assessment-form">
 				{{#each answers}}
-					<div class="form-group">
-						{{add @index}}.
-						<label>
-							<input type="radio" name="q{{add @index}}" value="A" hidden>
-							<img src="http://www.freedigitalphotos.net/images/img/homepage/87357.jpg"/>
-						</label>
-						<input type="radio" name="q{{add @index}}" value="A">A
-						<input type="radio" name="q{{add @index}}" value="B">B
-						<input type="radio" name="q{{add @index}}" value="C">C
-						<input type="radio" name="q{{add @index}}" value="D">D
-						<input type="radio" name="q{{add @index}}" value="E">E
+					<div class="img-radio-form">
+						<div class="form-group">
+							{{add @index}}.
+							<input id="A{{add @index}}" type="radio" name="q{{add @index}}" value="A" /> A
+							<label class="img-radio A" for="A{{add @index}}"></label>
+      		  				<input id="B{{add @index}}" type="radio" name="q{{add @index}}" value="B" /> B
+        					<label class="img-radio B" for="B{{add @index}}"></label>
+        					<input id="C{{add @index}}" type="radio" name="q{{add @index}}" value="C" /> C
+							<label class="img-radio C" for="C{{add @index}}"></label>
+        					<input id="D{{add @index}}" type="radio" name="q{{add @index}}" value="D" /> D
+        					<label class="img-radio D" for="D{{add @index}}"></label>
+        					<input id="E{{add @index}}" type="radio" name="q{{add @index}}" value="E" /> E
+							<label class="img-radio E" for="E{{add @index}}"></label>
+						</div>
 					</div>
 				{{/each}}
 			<button class="assessment-button" type="submit">Submit Assessment</button>
 		</form>
 	</div>
+	<br><br><br><br>
 </template>

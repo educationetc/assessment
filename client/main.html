@@ -7,8 +7,6 @@
 
 <template name="app">
 	<body>
-		<div id="success">{{success}}</div>
-		<div id="error">{{error}}</div>
 		<div>
 			{{> Template.dynamic template=content}}
 		</div>
@@ -32,8 +30,7 @@
   			<br>
   		</footer>
 
-      <div id="error" class="text-center">
-        <p id="error-msg" style="font-size: 14px; color: block;margin-top:16px">ok</p>
-      </div>
+      <div id="error" class="text-center"></div>
+      <div id="success" class="text-center"></div>
 	</body>
 </template>

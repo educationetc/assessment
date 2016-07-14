@@ -2,6 +2,8 @@
 	<br><br><br>
 	<div class="container">
 		<h2 style="float: left">Dashboard</h2>
+
+		{{#if Template.subscriptionsReady}}
 		<a href="/create"><button class="assessment-button" style="float: right; margin-top: 15px; background-color: #33cc33; border: 3px solid #009900">Create Assessment</button></a>
 		<br><br><br><br>
 		<table class="table table-striped">
@@ -21,12 +23,15 @@
 						<td>{{ this.name }}</td>
 						<td>{{ this.scores.length }}</td>
 						<td>{{ this.avg }}</td>
-						<td>{{ this.createdAt }}</td>
+						<td>{{ from this.createdAt }}</td>
 						<td><a href="/{{ this._id }}/view">view</a></td>
 						<td><a href="/{{ this._id }}/edit">edit</a></td>
 					</tr>
 				{{/each}}
 			</tbody>
 		</table>
+		{{else}}
+		<h1>LOADING...</h1>
+		{{/if}}
 	</div>
 </template>
