@@ -1,4 +1,4 @@
-var key = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var key = '1234567890ABCDEFGHJKLMNPQRSTUVWXYZ';
 
 function generateId(int) {
 	var str = '';
@@ -34,7 +34,7 @@ Meteor.publish('scores', function(testId) {
 Meteor.methods({
 	'insertTest': function(options) {
 		Tests.insert({
-			token: generateId(6),
+			token: generateId(5),
 			admin: this.userId,
 			name: options.name,
 			answers: options.answers,
