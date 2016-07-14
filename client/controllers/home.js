@@ -24,7 +24,6 @@ Template.home.events({
 		if(!studentName)
 			return error('Student id not found.');
 
-		console.log(studentName);
 		Session.set('student-name', studentName);
 		Session.set('student-id', id);
 		Session.set('student-name', ref[id]);

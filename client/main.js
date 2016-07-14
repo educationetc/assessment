@@ -53,7 +53,7 @@ from = function(time) {
 	else if((s / 60) > 1)
 		str = (~~(s / 60)) + ' minutes ago'
 	else
-		str = s + ' seconds ago'
+		str = ~~s + ' seconds ago'
 
 	return str;
 }

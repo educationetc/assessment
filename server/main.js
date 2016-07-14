@@ -58,7 +58,8 @@ Meteor.methods({
 	},
 
 	'insertScore': function(options) {
-		Scores.insert({
+
+		return Scores.insert({
 			testId: options.testId,
 			studentName: options.studentName,
 			studentId: options.studentId,
@@ -67,12 +68,9 @@ Meteor.methods({
 			numCorrect: 0,
 			createdAt: 0
 		});
-
-		return Scores.findOne({});
 	},
 
 	'updateScore': function(options) {
-		console.log(options)
 
 		Scores.update({
 			_id: options._id

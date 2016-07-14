@@ -39,10 +39,9 @@ Router.route('/:token/t', function() {
 			if(err)
 				return error(err);
 
-			Session.set('score-id', res._id);
+			Session.set('score-id', res);
 
 			console.log(res);
-			console.log(res._id)
 
 			BlazeLayout.render('app', {content: 'assessment', answers: new Array(length)});
 		})
@@ -76,13 +75,21 @@ Template.assessment.events({
 			if(err)
 				return error(err);
 
-			BlazeLayout.render('app', {content: 'results', percentage: res.percentage, numCorrect: res.numCorrect, length: length});
+			delete Session.keys; /* if student-id key remains defined, assessment can be retaken */
+
+			Router.go('/');
+
+			success('Assessment submitted.');
+
+			// BlazeLayout.render('app', {content: 'results', percentage: res.percentage, numCorrect: res.numCorrect, length: length});
 		});
 	},
 
 	'change input' (e) {
 
 		var res = processResponses(false);
+
+		console.log(Session.get('score-id'));
 
 		var options = {
 			_id: Session.get('score-id'),
