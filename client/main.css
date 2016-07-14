@@ -105,17 +105,17 @@ footer ul li {
 	width: 120px;
 }
 
-/*.img-radio-form input{
+.img-radio-form input{
     margin:0;padding:0;
     -webkit-appearance:none;
        -moz-appearance:none;
             appearance:none;
 }
-.A{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
-.B{background-image:url(http://i.imgur.com/SJbRQF7.png);}
-.C{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
-.D{background-image:url(http://i.imgur.com/SJbRQF7.png);}
-.E{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
+.A{background-image:url(img/a.png);}
+.B{background-image:url(img/b.png);}
+.C{background-image:url(img/c.png);}
+.D{background-image:url(img/d.png);}
+.E{background-image:url(img/e.png);}
 
 .img-radio-form input:active +.img-radio{opacity: .9;}
 .img-radio-form input:checked +.img-radio{
@@ -140,7 +140,7 @@ footer ul li {
     -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
        -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
             filter: brightness(1.2) grayscale(.5) opacity(.9);
-}*/
+}
 
 footer a {
 	text-decoration: none !important;
