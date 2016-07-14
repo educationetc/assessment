@@ -94,7 +94,7 @@ Template.assessment.events({
 		Meteor.call('updateScore', options, function(err, res) {
 			if(err)
 				return error(err);
-		})
+		});
 	}
 });
 

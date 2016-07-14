@@ -26,21 +26,17 @@ Router.route('/:testId/edit', function() {
 	} else {
 		BlazeLayout.render('app', {content: 'spinner'});
 	}
-})
+});
 
 Template.edit.helpers({
 	questions() {
 		return Session.get('questions');
 	},
 
-	add(int) {
-		return int + 1;
-	},
-
 	check(a, b) {
 		return a === b;
 	}
-})
+});
 
 Template.edit.events({
 	'click #add-question'(e) {
@@ -90,4 +86,4 @@ Template.edit.events({
 			Router.go('/dashboard');
 		});
 	}
-})
+});

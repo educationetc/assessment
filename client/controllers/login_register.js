@@ -5,21 +5,21 @@ Router.route('/login', function() {
 		return Router.go('/dashboard');
 
 	BlazeLayout.render('app', {content: 'login'});
-})
+});
 
 Router.route('/register', function() {
 	if(Meteor.user())
 		return Router.go('/dashboard');
 
 	BlazeLayout.render('app', {content: 'register'});
-})
+});
 
 Router.route('/logout', function() {
 	Meteor.logout();
 	
 	success('Logged out successfully.')
 	Router.go('/');
-})
+});
 
 Template.login.events({
 	'submit #login-form'(e) {
@@ -36,7 +36,7 @@ Template.login.events({
 			Router.go('/dashboard');
 		});
 	}
-})
+});
 
 Template.register.events({
 	'submit #register-form'(e) {
@@ -68,4 +68,4 @@ Template.register.events({
 			Router.go('/dashboard');
 		});
 	}
-})
+});

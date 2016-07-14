@@ -29,7 +29,7 @@ Users
 
 Router.route('/about', function() {
 	BlazeLayout.render('app', {content: 'about'});
-})
+});
 
 Template.registerHelper('add', (int) => int + 1)
 Template.registerHelper('session', (key) => Session.get(key));
@@ -51,7 +51,7 @@ Template.registerHelper('from', (time) => {
 		str = s + ' seconds ago'
 
 	return str;
-})
+});
 
 error = function(msg) {
 	$('#error').fadeIn(1000);

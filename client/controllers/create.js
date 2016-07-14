@@ -54,16 +54,12 @@ Template.create.events({
 				return error(err);
 
 			Router.go('/dashboard');
-		})
+		});
 	}
-})
+});
 
 Template.create.helpers({
 	questions() {
 		return Session.get('questions');
-	},
-
-	add(int) {
-		return int + 1;
 	}
-})
+});

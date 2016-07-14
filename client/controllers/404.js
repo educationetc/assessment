@@ -8,4 +8,4 @@ Template['404'].helpers({
 	loadImg() {
 		return errorImages[Math.round(Math.random() * (errorImages.length - 1))];
 	}
-})
+});
