@@ -30,6 +30,7 @@ Router.route('/:token/t', function() {
 
 		var options = {
 			testId: test._id,
+			studentName: Session.get('student-name'),
 			studentId: Session.get('student-id'),
 			answers: (new Array(length)).fill('F')
 		}

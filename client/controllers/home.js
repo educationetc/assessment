@@ -19,10 +19,15 @@ Template.home.events({
 		if (!id)
 			return error('Please enter student id');
 
+		var studentName = ref[parseInt(id)];
+
+		if(!studentName)
+			return error('Student id not found.');
+
+		console.log(studentName);
+		Session.set('student-name', studentName);
 		Session.set('student-id', id);
 		Session.set('student-name', ref[id]);
-
-		console.log('going...')
 
 		Router.go('/' + Session.get('token') + '/t');
 	},
@@ -79,7 +84,7 @@ var ref = {
 	18512: 'Evans, Reid',
 	20074: 'Garrett, Joshua',
 	52725: 'Godbold, Sean',
-	11111: 'Ives, Jill',
+	19003: 'Ives, Jill',
 	51436: 'Marshall, Stephanie',
 	41906: 'Rosalva, Michael',
 	17927: 'Senecal, Joshua'

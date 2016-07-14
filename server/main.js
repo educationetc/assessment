@@ -60,6 +60,7 @@ Meteor.methods({
 	'insertScore': function(options) {
 		Scores.insert({
 			testId: options.testId,
+			studentName: options.studentName,
 			studentId: options.studentId,
 			answers: options.answers,
 			percentage: 0,
