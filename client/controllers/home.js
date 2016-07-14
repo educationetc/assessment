@@ -19,12 +19,17 @@ Template.home.events({
 		var id = $('input[name="student-id"]').val();
 
 		if (!id)
-			return $('#error').text('Please enter student id');
+			return error('Please enter student id');
 
+		var studentName = ref[parseInt(id)];
+
+		if(!studentName)
+			return error('Student id not found.');
+
+		console.log(studentName);
+		Session.set('student-name', studentName);
 		Session.set('student-id', id);
 		Session.set('student-name', ref[id]);
-
-		console.log('lah');
 
 		Router.go('/' + Session.get('token') + '/t');
 	},

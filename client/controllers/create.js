@@ -34,6 +34,11 @@ Template.create.events({
 		e.preventDefault();
 
 		var questions = Session.get('questions');
+
+		// make sure they cant have 
+		if(questions.length === 1)
+			return error('You cannot have 0 questions!');
+
 		questions.pop();
 
 		Session.set('questions', questions);
