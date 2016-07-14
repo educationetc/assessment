@@ -83,7 +83,7 @@ Meteor.methods({
 				numCorrect: options.numCorrect,
 				createdAt: (options.createdAt || 0)
 			}
-		})
+		});
 	},
 
 	'getScores': function(testId) {
@@ -92,5 +92,15 @@ Meteor.methods({
 
 	'getOwnedTests': function() {
 		return Tests.find({admin: this.userId}, {sort: {createdAt: -1}}).fetch();
+	},
+
+	'cheating': function(scoreId, isCheating) {
+		Scores.update({
+			_id: scoreId
+		}, {
+			$set: {
+				createdAt: isCheating ? -1 : 0
+			}
+		});
 	}
 });
