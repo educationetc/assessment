@@ -29,11 +29,6 @@ Template.home.events({
 		Session.set('student-id', id);
 		Session.set('student-name', ref[id]);
 
-<<<<<<< HEAD
-=======
-		console.log('going...')
-
->>>>>>> 67b86ea54d457eb1be972c1276d090cb485322c8
 		Router.go('/' + Session.get('token') + '/t');
 	},
 });
@@ -89,7 +84,7 @@ var ref = {
 	18512: 'Evans, Reid',
 	20074: 'Garrett, Joshua',
 	52725: 'Godbold, Sean',
-	11111: 'Ives, Jill',
+	19003: 'Ives, Jill',
 	51436: 'Marshall, Stephanie',
 	41906: 'Rosalva, Michael',
 	17927: 'Senecal, Joshua'

@@ -45,7 +45,7 @@ Template.registerHelper('from', (time) => {
 		str = (~~(s/86400)) + ' days ago'
 	else if(s / 3600 > 1)
 		str = (~~(s / 3600)) + ' hours ago'
-	else if(s / 60)
+	else if((s / 60) > 1)
 		str = (~~(s / 60)) + ' minutes ago'
 	else
 		str = s + ' seconds ago'
