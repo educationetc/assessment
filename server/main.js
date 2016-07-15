@@ -100,7 +100,12 @@ Meteor.methods({
 	},
 
 	'hasTaken': function(options) {
-		return Scores.find({$and: [{testId: options.testId}, {studentId: options.studentId}]}) ? true : false;
+		var score = Scores.find({$and: [{testId: options.testId}, {studentId: options.studentId}]}).fetch();
+		console.log(score);
+		if(score)
+			return true;
+		else
+			return false;
 	},
 
 	'cheating': function(scoreId, isCheating) {

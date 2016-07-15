@@ -24,19 +24,19 @@ Template.home.events({
 		if(!studentName)
 			return error('Student id not found.');
 
-		Meteor.call('hasTaken', {studentId: id, testId: Session.get('token')}, function(err, res) {
-			if(err)
-				return console.log(err);
+		// Meteor.call('hasTaken', {studentId: id, testId: Session.get('token')}, function(err, res) {
+		// 	if(err)
+		// 		return console.log(err);
 
-			if(res)
-				return error('You cannot take the same test more than once!');
+		// 	if(res)
+		// 		return error('You cannot take the same test more than once!');
 
 			Session.set('student-name', studentName);
 			Session.set('student-id', id);
 			Session.set('student-name', ref[id]);
 
 			Router.go('/' + Session.get('token') + '/t');
-		})
+		// })
 	},
 
 	'click #powerschool-btn' (e) {
