@@ -38,6 +38,14 @@ Template.home.events({
 			Router.go('/' + Session.get('token') + '/t');
 		})
 	},
+
+	'click #powerschool-btn' (e) {
+		Meteor.call('sendEmail',
+            'coltranenadler@gmail.com',
+            'coltranenadler@gmail.com',
+            'Hello from Meteor!',
+            'This is a test of Email.send.');
+	}
 });
 
 // function error(err) {
