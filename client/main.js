@@ -34,8 +34,13 @@ Router.route('/about', function() {
 Template.registerHelper('add', (int) => int + 1)
 Template.registerHelper('session', (key) => Session.get(key));
 Template.registerHelper('from', (time) => {
+	return from(time);
+});
+
+from = function(time) {
+	console.log(time);
 	if(time === 0)
-		return 'Currently in progress'
+		return '';
 
 	var t = Date.now() - time
 		, s = t / 1000
@@ -48,10 +53,10 @@ Template.registerHelper('from', (time) => {
 	else if((s / 60) > 1)
 		str = (~~(s / 60)) + ' minutes ago'
 	else
-		str = s + ' seconds ago'
+		str = ~~s + ' seconds ago'
 
 	return str;
-});
+}
 
 error = function(msg) {
 	$('#error').fadeIn(1000);

@@ -2,8 +2,7 @@ import { Tests } from '../../mongo/tests.js';
 import { Scores } from '../../mongo/scores.js';
 
 var test, /* the test object */
-	length, /* the length of the test */
-	id; /* the _id of the current student response in the scores collection */
+	length; /* the length of the test */
 
 Router.route('/:token/t', function() {
 	BlazeLayout.render('app', {content: 'spinner'});
@@ -40,10 +39,9 @@ Router.route('/:token/t', function() {
 			if(err)
 				return error(err);
 
-			Session.set('score-id', res._id);
+			Session.set('score-id', res);
 
 			console.log(res);
-			console.log(res._id)
 
 			BlazeLayout.render('app', {content: 'assessment', answers: new Array(length)});
 		})
@@ -61,7 +59,8 @@ Template.assessment.events({
 		if (!res)
 			return error('Please fill out entire assessment');
 
-		window.removeEventListener('blur', noCheating);
+		window.removeEventListener('blur', cheating);
+		window.removeEventListener('focus', doneCheating);
 
 		var options = {
 			_id: Session.get('score-id'),
@@ -76,13 +75,21 @@ Template.assessment.events({
 			if(err)
 				return error(err);
 
-			BlazeLayout.render('app', {content: 'results', percentage: res.percentage, numCorrect: res.numCorrect, length: length});
+			Session.keys = {}; /* if student-id key remains defined, assessment can be retaken */
+
+			Router.go('/');
+
+			success('Assessment submitted.');
+
+			// BlazeLayout.render('app', {content: 'results', percentage: res.percentage, numCorrect: res.numCorrect, length: length});
 		});
 	},
 
 	'change input' (e) {
 
 		var res = processResponses(false);
+
+		console.log(Session.get('score-id'));
 
 		var options = {
 			_id: Session.get('score-id'),
@@ -100,11 +107,17 @@ Template.assessment.events({
 });
 
 Template.assessment.onCreated(function () {
-	window.addEventListener('blur', noCheating);
+	window.addEventListener('blur', cheating);
+	window.addEventListener('focus', doneCheating);
 });
 
-function noCheating() {
-    error('Do not leave the page or your test will be voided');;
+function cheating() {
+    error('Do not leave the page or your test will be voided');
+    Meteor.call('cheating', Session.get('score-id'), true);
+}
+
+function doneCheating() {
+	Meteor.call('cheating', Session.get('score-id'), false);
 }
 
 function processResponses(mustBeCompleted) {

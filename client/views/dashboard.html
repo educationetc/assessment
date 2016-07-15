@@ -2,8 +2,6 @@
 	<br><br><br>
 	<div class="container">
 		<h2 style="float: left">Dashboard</h2>
-
-		{{#if Template.subscriptionsReady}}
 		<a href="/create"><button class="assessment-button" style="float: right; margin-top: 15px; background-color: #33cc33; border: 3px solid #009900">Create Assessment</button></a>
 		<br><br><br><br>
 		<table class="table table-striped">
@@ -11,8 +9,8 @@
 				<th>Token</th>
 				<th>Name</th>
 				<th>Tests</th>
-				<th>Avg</th>
-				<th>Date Created</th>
+				<th>Average</th>
+				<th>Created</th>
 				<th>View</th>
 				<th>Edit</th>
 			</thead>
@@ -30,8 +28,5 @@
 				{{/each}}
 			</tbody>
 		</table>
-		{{else}}
-		<h1>LOADING...</h1>
-		{{/if}}
 	</div>
 </template>

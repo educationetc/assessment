@@ -19,7 +19,7 @@ Router.route('/:testId/view', {
 			var scores = Scores.find({testId: this.params.testId}).fetch();
 
 			if (scores.length === 0)
-				return BlazeLayout.render('app', {content: 'view', error: 'No scores found'});
+				error('No scores found.');
 
 			BlazeLayout.render('app', {content: 'view', scores: scores, test: test});
 
@@ -43,13 +43,35 @@ Template.view.helpers({
 	},
 
 	buildScoreString (score) {
-		var omitted = 0;
+		var o = 0;
 
 		$.each(score.answers, function (index, value) {
-			if (value === 'F') omitted++;
+			if (value === 'F') o++;
 		});
 
-		return score.numCorrect + ' out of ' + (score.answers.length - omitted) + ((omitted > 0) ? (' (' + omitted + ' yet to answer)') : '');
+		return score.numCorrect + ' out of ' + (score.answers.length - o) + ((o > 0) ? (' (' + o + ' yet to answer)') : '');
+	},
 
+	buildStatusString (score) {
+		return score.createdAt === 0 ? 'In progress' : score.createdAt === -1 ? 'Potentially Cheating (Exited Assessment)' : 'Completed ' + from(score.createdAt);
+	},
+
+	getName(studentId) {
+		return ref[parseInt(studentId)];
 	}
 });
+
+var ref = {
+	18665: 'Bailey, Devon',
+	57926: 'Baye-Ellison, Zayd',
+	18675: 'Carri, Anthony',
+	54623: 'Dawes, Xavier',
+	57716: 'Evangelist, Kara',
+	18512: 'Evans, Reid',
+	20074: 'Garrett, Joshua',
+	52725: 'Godbold, Sean',
+	19003: 'Ives, Jill',
+	51436: 'Marshall, Stephanie',
+	41906: 'Rosalva, Michael',
+	17927: 'Senecal, Joshua'
+}

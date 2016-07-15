@@ -28,7 +28,7 @@ Template.home.events({
 			if(err)
 				return console.log(err);
 
-			if(!res)
+			if(res)
 				return error('You cannot take the same test more than once!');
 
 			Session.set('student-name', studentName);

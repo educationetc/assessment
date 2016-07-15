@@ -6,20 +6,20 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>	
-					<th>Student ID</th>
+					<th>Name</th>
 					<th>Score</th>
 					<th>Percentage</th> 
-					<th>Date Taken</th>
+					<th>Status</th>
 					<th>Responses</th>
 				</tr>
 			</thead>
 			<tbody>
 				{{#each scores}}
 				<tr>
-					<td>{{this.studentId}}</td>
+					<td>{{getName this.studentId}}</td>
 					<td>{{buildScoreString this}}</td>
 					<td>{{this.percentage}}%</td>
-					<td>{{from this.createdAt}}</td>
+					<td>{{buildStatusString this}}</td>
 					<td>
 						<ul style="height:40px;width:100px;overflow:scroll;display:inline;">
 							{{#each this.answers}}

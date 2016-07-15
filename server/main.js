@@ -1,4 +1,4 @@
-var key = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var key = '1234567890ABCDEFGHJKLMNPQRSTUVWXYZ';
 
 function generateId(int) {
 	var str = '';
@@ -34,7 +34,7 @@ Meteor.publish('scores', function(testId) {
 Meteor.methods({
 	'insertTest': function(options) {
 		Tests.insert({
-			token: generateId(6),
+			token: generateId(5),
 			admin: this.userId,
 			name: options.name,
 			answers: options.answers,
@@ -58,7 +58,8 @@ Meteor.methods({
 	},
 
 	'insertScore': function(options) {
-		Scores.insert({
+
+		return Scores.insert({
 			testId: options.testId,
 			studentName: options.studentName,
 			studentId: options.studentId,
@@ -67,12 +68,9 @@ Meteor.methods({
 			numCorrect: 0,
 			createdAt: 0
 		});
-
-		return Scores.findOne({});
 	},
 
 	'updateScore': function(options) {
-		console.log(options)
 
 		Scores.update({
 			_id: options._id
@@ -84,7 +82,7 @@ Meteor.methods({
 				numCorrect: options.numCorrect,
 				createdAt: (options.createdAt || 0)
 			}
-		})
+		});
 	},
 
 	'getScores': function(testId) {
@@ -97,5 +95,15 @@ Meteor.methods({
 
 	'hasTaken': function(options) {
 		return Scores.find({$and: [{testId: options.testId}, {studentId: options.studentId}]}) ? true : false;
+	},
+
+	'cheating': function(scoreId, isCheating) {
+		Scores.update({
+			_id: scoreId
+		}, {
+			$set: {
+				createdAt: isCheating ? -1 : 0
+			}
+		});
 	}
 });
