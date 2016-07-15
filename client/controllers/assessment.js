@@ -112,11 +112,11 @@ Template.assessment.onCreated(function () {
 });
 
 function cheating() {
-    error('Do not leave the page or your test will be voided');
     Meteor.call('cheating', Session.get('score-id'), true);
 }
 
 function doneCheating() {
+	error('Do not leave the page or your test will be voided');
 	Meteor.call('cheating', Session.get('score-id'), false);
 }
 
