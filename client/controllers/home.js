@@ -24,12 +24,19 @@ Template.home.events({
 		if(!studentName)
 			return error('Student id not found.');
 
-		console.log(studentName);
-		Session.set('student-name', studentName);
-		Session.set('student-id', id);
-		Session.set('student-name', ref[id]);
+		Meteor.call('hasTaken', {studentId: id, testId: Session.get('token')}, function(err, res) {
+			if(err)
+				return console.log(err);
 
-		Router.go('/' + Session.get('token') + '/t');
+			if(!res)
+				return error('You cannot take the same test more than once!');
+
+			Session.set('student-name', studentName);
+			Session.set('student-id', id);
+			Session.set('student-name', ref[id]);
+
+			Router.go('/' + Session.get('token') + '/t');
+		})
 	},
 });
 

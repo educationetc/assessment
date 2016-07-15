@@ -93,5 +93,9 @@ Meteor.methods({
 
 	'getOwnedTests': function() {
 		return Tests.find({admin: this.userId}, {sort: {createdAt: -1}}).fetch();
+	},
+
+	'hasTaken': function(options) {
+		return Scores.find({$and: [{testId: options.testId}, {studentId: options.studentId}]}) ? true : false;
 	}
 });
