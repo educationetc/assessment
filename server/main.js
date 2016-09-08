@@ -44,6 +44,7 @@ Meteor.methods({
 			admin: this.userId,
 			name: options.name,
 			answers: options.answers,
+			classroom: options.classroom,
 			createdAt: Date.now()
 		});
 	},
@@ -100,7 +101,8 @@ Meteor.methods({
 	},
 
 	'hasTaken': function(options) {
-		var score = Scores.find({$and: [{testId: options.testId}, {studentId: options.studentId}]}).fetch();
+		console.log(options)
+		var score = Scores.findOne({$and: [{testId: options.testId}, {studentId: options.studentId}]});
 		console.log(score);
 		if(score)
 			return true;

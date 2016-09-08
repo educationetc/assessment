@@ -38,7 +38,8 @@ Template.create.events({
 
 		var answers 	= '',
 			length 		= $('.form-group').length - 1,
-			name 		= $('input[name="name"]').val();
+			name 		= $('input[name="name"]').val(),
+			classroom	= $('#classroom').val()
 
 		if(!name)
 			return error('Please name your test.');
@@ -51,7 +52,8 @@ Template.create.events({
 
 		var options = {
 			name: name,
-			answers: answers.split('')
+			answers: answers.split(''),
+			classroom: classroom
 		}
 
 		Meteor.call('insertTest', options, function(err, res) {
