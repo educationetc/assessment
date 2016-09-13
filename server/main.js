@@ -103,11 +103,7 @@ Meteor.methods({
 	'hasTaken': function(options) {
 		console.log(options)
 		var score = Scores.findOne({$and: [{testId: options.testId}, {studentId: options.studentId}]});
-		console.log(score);
-		if(score)
-			return true;
-		else
-			return false;
+		return score;
 	},
 
 	'cheating': function(scoreId, isCheating) {
