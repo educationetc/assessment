@@ -128,14 +128,13 @@ function processResponses(mustBeCompleted) {
 	for (var i = 1; i < length + 1; i++)
 		responses += $('input[name="q' + i + '"]:checked').val();
 
-	if (responses.includes('undefined') && mustBeCompleted)
-		return false;
+	// if (responses.includes('undefined') && mustBeCompleted)
+	// 	return false;
 
 	responses = responses.replace(/undefined/g, 'F'); /* F signifies a blank response */
 	responses = responses.split('');
 
 	for (var i = 0; i < length; i++) {
-		if (responses[i] === 'F') continue;
 		total++;
 		if (responses[i] === test.answers[i]) numCorrect++;
 	}

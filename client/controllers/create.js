@@ -45,7 +45,7 @@ Template.create.events({
 			return error('Please name your test.');
 
 		for (var i = 1; i < length + 1; i++)
-			answers += $('input[name="q' + i + '"]:checked').val();
+			answers += $('input[name="q' + i + '"]:checked').val() ? $('input[name="q' + i + '"]:checked').val() : 'O';
 
 		if (answers.includes('undefined'))
 			return error('Please fill out entire assessment');

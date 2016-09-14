@@ -16,7 +16,7 @@
 			<tbody>
 				{{#each scores}}
 				<tr>
-					<td>{{getName this.studentId}}</td>
+					<td>{{getName this.studentId test.classroom}}</td>
 					<td>{{buildScoreString this}}</td>
 					<td>{{this.percentage}}%</td>
 					<td>{{buildStatusString this}}</td>
@@ -25,6 +25,8 @@
 							{{#each this.answers}}
 								{{#if isntF this}}
 									<li class="btn btn-primary btn-sm btns" style="background-color:{{color this @index}};">{{this}}</li>
+								{{else}}
+									<li class="btn btn-primary btn-sm btns" style="background-color: white">O</li>
 								{{/if}}
 							{{/each}}
 						</ul>
@@ -33,7 +35,7 @@
 				{{/each}}
 			</tbody>
 		</table>
-		<button id="powerschool-btn" class="btn btn-primary" style="width: 100%">Submit to Powerschool</button>
+		<button id="powerschool-btn" class="btn btn-primary" style="width: 100%">Export to Google Drive</button>
 		<br><br>
 	</div>
 	<br><br><br>
