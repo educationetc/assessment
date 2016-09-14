@@ -11,6 +11,7 @@ Router.route('/create', function () {
 
 
 Meteor.startup(function () {
+if (Meteor.user()) {
   $(document).on('keyup', function (e) {
    	switch (e.which) {
 		case 65:
@@ -32,6 +33,7 @@ Meteor.startup(function () {
 			return;
 	}
   });
+}
 });
 
 Template.create.events({

@@ -1,7 +1,6 @@
 import { Scores } from '../../mongo/scores.js';
 import { Tests } from '../../mongo/tests.js';
 
-var test;
 
 Router.route('/:testId/view', {
 
@@ -11,7 +10,7 @@ Router.route('/:testId/view', {
 
 	action: function () {
 		if (this.ready()) {
-			test = Tests.findOne({_id: this.params.testId});
+			var test = Tests.findOne({_id: this.params.testId});
 
 			if (!Meteor.user() || !test || test.admin !== Meteor.userId())
 				return BlazeLayout.render('app', {content: '404'});
@@ -21,13 +20,26 @@ Router.route('/:testId/view', {
 			if (scores.length === 0)
 				error('No scores found.');
 
-			console.log(test.classroom)
-
+			Session.set('test', test);
+			Session.set('scores', scores);
 			BlazeLayout.render('app', {content: 'view', scores: scores, test: test});
 
 		} else {
 			BlazeLayout.render('app', {content: 'spinner'});
 		}
+	}
+});
+
+Template.view.events({
+
+	'click #update-sheet' (e) {
+		console.log('click');
+		Meteor.call('updateSheet', buildCSV(), function(err, res) {
+				if (err)
+					return error(err.error);
+	
+				success('Google Spreadsheet updated!');
+		});
 	}
 });
 
@@ -60,9 +72,11 @@ Template.view.helpers({
 	},
 
 	getName(studentId, classroom) {
-		console.log(classroom);
-		return 'hey'
-		// return classrooms[classname][studentId];
+		return classrooms[classroom][studentId];
+	},
+
+	getClassroom() {
+		return Session.get('test').classroom;
 	}
 });
 
@@ -175,4 +189,19 @@ var classrooms = {
 		18469:	'Weiss, Luisa Christina',
 		19608:	'Wood, Jeremy Kwestel'
 	}
+}
+
+function buildCSV() {
+	console.log('building');
+	var s = '',
+		sc = Session.get('scores');
+
+	console.log(sc);
+	for (var i = 0; i < sc.length; i++) {
+		console.log(sc[i]);
+		s += (sc[i].studentId + ',' + sc[i].percentage + '\n');
+	}
+
+	console.log(s);
+	return encodeURIComponent(s);
 }

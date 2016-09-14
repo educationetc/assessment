@@ -129,5 +129,13 @@ Meteor.methods({
 	      subject: subject,
 	      text: text
 	    });
-  	}
+  	},
+
+  	'updateSheet': function(data) {
+    	//send the data to a listener script on the spreadsheet using a get request
+    	HTTP.call( 'GET', 'https://script.google.com/macros/s/AKfycbxf04KlyujdhvBTOO5qW-Q6UM6nj5aX4dyth5GGt6GjeFa9I44/exec?data=' + data, {}, function(err, res) {
+    	  if (err || (res.data.result || '') !== 'success')
+    	    throw new Meteor.Error('Google Spreadsheet could not be updated.');
+    });
+  }
 });

@@ -17,7 +17,7 @@
 			<tbody>
 				{{#each scores}}
 				<tr>
-					<td>{{getName this.studentId test.classroom}}</td>
+					<td>{{getName this.studentId getClassroom}}</td>
 					<td>{{buildScoreString this}}</td>
 					<td>{{this.percentage}}%</td>
 					<td>{{buildStatusString this}}</td>
@@ -36,7 +36,7 @@
 				{{/each}}
 			</tbody>
 		</table>
-		<button id="powerschool-btn" class="btn btn-primary" style="width: 100%">Export to Google Drive</button>
+		<button id="update-sheet" class="btn btn-primary" style="width: 100%">Export to Google Drive</button>
 		<br><br>
 	</div>
 	<br><br><br>
