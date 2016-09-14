@@ -11,29 +11,31 @@ Router.route('/create', function () {
 
 
 Meteor.startup(function () {
-if (Meteor.user()) {
   $(document).on('keyup', function (e) {
-   	switch (e.which) {
-		case 65:
-			bubbleNext('A');
-			break;
-		case 66:
-			bubbleNext('B');
-			break;
-		case 67:
-			bubbleNext('C');
-			break;
-		case 68:
-			bubbleNext('D');
-			break;
-		case 69:
-			bubbleNext('E');
-			break;
-		default:
-			return;
+  	if (Router.current().route.getName() === 'create') {
+   		switch (e.which) {
+			case 65:
+				bubbleNext('A');
+				break;
+			case 66:
+				bubbleNext('B');
+				break;
+			case 67:
+				bubbleNext('C');
+				break;
+			case 68:
+				bubbleNext('D');
+				break;
+			case 69:
+				bubbleNext('E');
+				break;
+			default:
+				return;
+		}
+	} else {
+		$(document).off('keyup');
 	}
   });
-}
 });
 
 Template.create.events({
