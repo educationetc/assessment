@@ -5,37 +5,9 @@ Router.route('/create', function () {
 	if(!Meteor.user())
 		return BlazeLayout.render('app', {error: '404'});
 
+	addListener();
 	Session.set('questions', new Array(5));
 	BlazeLayout.render('app', {content: 'create'});
-});
-
-
-Meteor.startup(function () {
-  $(document).on('keyup', function (e) {
-  	if (Router.current().route.getName() === 'create') {
-   		switch (e.which) {
-			case 65:
-				bubbleNext('A');
-				break;
-			case 66:
-				bubbleNext('B');
-				break;
-			case 67:
-				bubbleNext('C');
-				break;
-			case 68:
-				bubbleNext('D');
-				break;
-			case 69:
-				bubbleNext('E');
-				break;
-			default:
-				return;
-		}
-	} else {
-		$(document).off('keyup');
-	}
-  });
 });
 
 Template.create.events({
@@ -111,4 +83,35 @@ function bubbleNext(answer) {
 	Session.set('questions', questions);
 
 	setTimeout(function () { $('input[id="' + answer + Session.get('questions').length + '"]').prop('checked', true) }, 0);
+}
+
+
+function addListener() {
+	$(document).on('keyup', function (e) {
+  		if (Router.current().route.getName() === 'create') {
+  			if ($("#assessment-name").is(":focus"))
+  				return;
+   			switch (e.which) {
+				case 65:
+					bubbleNext('A');
+					break;
+				case 66:
+					bubbleNext('B');
+					break;
+				case 67:
+					bubbleNext('C');
+					break;
+				case 68:
+					bubbleNext('D');
+					break;
+				case 69:
+					bubbleNext('E');
+					break;
+				default:
+					return;
+			}
+		} else {
+			$(document).off('keyup');
+		}
+	});
 }

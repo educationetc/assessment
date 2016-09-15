@@ -53,7 +53,7 @@ Template.view.helpers({
 	},
 
 	color (answer, index) {
-		return test.answers[index] === answer ? 'green' : 'red';
+		return Session.get('test').answers[index] === answer ? 'green' : 'red';
 	},
 
 	buildScoreString (score) {
