@@ -26,9 +26,7 @@ Template.home.events({
 
 		Meteor.call('hasTaken', {studentId: id, testId: Session.get('testId')}, function(err, res) {
 			if(err)
-				return console.log(err);
-
-			console.log(res);
+				return error(err);
 
 			if(res)
 				return error('You cannot take the same test more than once!');
@@ -172,6 +170,40 @@ var classrooms = {
 		19254:	'Trewick, Valerie Alres',
 		19699:	'Viqueira, Marissa Sophia',
 		19342:	'Wendt, Isabelle Victoria'
+	},
+
+	'P9 Calc BC': {
+		19435: "Bell, John Leland",
+		18238: "Betheil, Jamie Aliyah",
+		19386: "Braka, Sarah Lily",
+		19948: "Calder, Cameron Marie",
+		19519: "Cotenoff, Isabelle Blu",
+		19473: "Doubek, Benjamin Joseph",
+		50578: "Duvergne, Lorenzo Pierre Leonid",
+		18699: "Ewing, Joshua Miguel",
+		19364: "Fagan, Marie Therese",
+		18443: "Farruggia, Ella Pascale",
+		19713: "Forman, Sam Alex",
+		21104: "Glynn, Alexander Patrick",
+		57400: "Grayer, Theodore Parker",
+		52398: "Haile, Joshua Seyoum",
+		19529: "Hajdukiewicz, Timothy James",
+		20736: "Harel, Eden Tayre",
+		19414: "Holowczak, Christopher David",
+		18367: "Holstein, Charli Abigail",
+		19285: "Hom, Matthew John",
+		19488: "Kret, Lauren Gari",
+		25526: "Levy, Frances Rebecca",
+		20846: "McClard, Solian Kim",
+		18451: "Molokwu, Stephanie Nneka",
+		19337: "Osner, Sylvia Ching-Jen K",
+		18310: "Pettigrew, William Reed",
+		19573: "Ribicoff, Gabriel Abraham Herna",
+		18431: "Schneiderman, Isabel Antonia",
+		19401: "Schwartzbard, Lauren Elizabeth",
+		19357: "Soles-Torres, Tran Thanh",
+		19240: "Wallin, Michael Louis",
+		18746: "West, Yajedah Abeo"
 	},
 
 	'AP CSP': {
