@@ -88,7 +88,7 @@ function checkToken(token) {
 var classrooms = {
 	'Algebra 1': {
 		59736:  'Gargyi, Reed Orion',
-		59757,  'Obu, Duke-Ntitobari Enun Olumba',
+		59757:  'Obu, Duke-Ntitobari Enun Olumba',
 		51458:  'Baluyut, Eabha Zane',
 		27804:	'Armstrong, Julien Alduron Dylan',
 		23627:	'Bethea, Zion Lemar',
