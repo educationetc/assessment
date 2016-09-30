@@ -87,6 +87,9 @@ function checkToken(token) {
 
 var classrooms = {
 	'Algebra 1': {
+		59736:  'Gargyi, Reed Orion',
+		59757,  'Obu, Duke-Ntitobari Enun Olumba',
+		51458:  'Baluyut, Eabha Zane',
 		27804:	'Armstrong, Julien Alduron Dylan',
 		23627:	'Bethea, Zion Lemar',
 		23224:	'Cohen, Milton Sarkis',
@@ -115,6 +118,8 @@ var classrooms = {
 	},
 
 	'Precalc CS': {
+		19506:  'Savoia-Di Gregorio, Sage Fu Huan',
+		19585:  'Stathakis, Kathryn Elisabeth',
 		54150:	'Berlin, Alisa Tzivya',
 		20543:	'Botschka, Abigail Mary',
 		19511:	'Brown, Emily Jeannette',
