@@ -21,7 +21,7 @@ Template.home.events({
 
 		var studentName = classrooms[Session.get('classroom')][parseInt(id)];
 
-		if(!studentName)
+		if(!studentName || !classrooms[Session.get('classroom')])
 				return error('You are not in this class...');
 
 		Meteor.call('hasTaken', {studentId: id, testId: Session.get('testId')}, function(err, res) {

@@ -33,7 +33,6 @@ Router.route('/:testId/view', {
 Template.view.events({
 
 	'click #update-sheet' (e) {
-		console.log('click');
 		Meteor.call('updateSheet', buildCSV(), function(err, res) {
 				if (err)
 					return error(err.error);
@@ -72,7 +71,7 @@ Template.view.helpers({
 	},
 
 	getName(studentId, classroom) {
-		return classrooms[classroom][studentId];
+		return classrooms[classroom][parseInt(studentId)];
 	},
 
 	getClassroom() {
@@ -80,8 +79,12 @@ Template.view.helpers({
 	}
 });
 
+
 var classrooms = {
 	'Algebra 1': {
+		59736:  'Gargyi, Reed Orion',
+		59757:  'Obu, Duke-Ntitobari Enun Olumba',
+		51458:  'Baluyut, Eabha Zane',
 		27804:	'Armstrong, Julien Alduron Dylan',
 		23627:	'Bethea, Zion Lemar',
 		23224:	'Cohen, Milton Sarkis',
@@ -110,6 +113,8 @@ var classrooms = {
 	},
 
 	'Precalc CS': {
+		19506:  'Savoia-Di Gregorio, Sage Fu Huan',
+		19585:  'Stathakis, Kathryn Elisabeth',
 		54150:	'Berlin, Alisa Tzivya',
 		20543:	'Botschka, Abigail Mary',
 		19511:	'Brown, Emily Jeannette',
@@ -160,6 +165,40 @@ var classrooms = {
 		19342:	'Wendt, Isabelle Victoria'
 	},
 
+	'P9 Calc BC': {
+		19435: "Bell, John Leland",
+		18238: "Betheil, Jamie Aliyah",
+		19386: "Braka, Sarah Lily",
+		19948: "Calder, Cameron Marie",
+		19519: "Cotenoff, Isabelle Blu",
+		19473: "Doubek, Benjamin Joseph",
+		50578: "Duvergne, Lorenzo Pierre Leonid",
+		18699: "Ewing, Joshua Miguel",
+		19364: "Fagan, Marie Therese",
+		18443: "Farruggia, Ella Pascale",
+		19713: "Forman, Sam Alex",
+		21104: "Glynn, Alexander Patrick",
+		57400: "Grayer, Theodore Parker",
+		52398: "Haile, Joshua Seyoum",
+		19529: "Hajdukiewicz, Timothy James",
+		20736: "Harel, Eden Tayre",
+		19414: "Holowczak, Christopher David",
+		18367: "Holstein, Charli Abigail",
+		19285: "Hom, Matthew John",
+		19488: "Kret, Lauren Gari",
+		25526: "Levy, Frances Rebecca",
+		20846: "McClard, Solian Kim",
+		18451: "Molokwu, Stephanie Nneka",
+		19337: "Osner, Sylvia Ching-Jen K",
+		18310: "Pettigrew, William Reed",
+		19573: "Ribicoff, Gabriel Abraham Herna",
+		18431: "Schneiderman, Isabel Antonia",
+		19401: "Schwartzbard, Lauren Elizabeth",
+		19357: "Soles-Torres, Tran Thanh",
+		19240: "Wallin, Michael Louis",
+		18746: "West, Yajedah Abeo"
+	},
+
 	'AP CSP': {
 		18534:	'Ash-Milby, Nathan Chee',
 		18245:	'Baker, James Leonard',
@@ -192,16 +231,12 @@ var classrooms = {
 }
 
 function buildCSV() {
-	console.log('building');
 	var s = '',
 		sc = Session.get('scores');
 
-	console.log(sc);
 	for (var i = 0; i < sc.length; i++) {
-		console.log(sc[i]);
 		s += (sc[i].studentId + ',' + sc[i].percentage + '\n');
 	}
 
-	console.log(s);
 	return encodeURIComponent(s);
 }
