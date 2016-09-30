@@ -47,13 +47,6 @@ Template.home.events({
 	}
 });
 
-// function error(err) {
-// 	$('#error').fadeIn(1000);
-// 	$('#error').text(err);
-
-// 	setTimeout(() => $('#error').fadeOut(1000), 2000);
-// }
-
 function checkToken(token) {
 
 	Meteor.call('getTest', token, function(err, res) {

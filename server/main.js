@@ -101,9 +101,7 @@ Meteor.methods({
 	},
 
 	'hasTaken': function(options) {
-		console.log(options)
-		var score = Scores.findOne({$and: [{testId: options.testId}, {studentId: options.studentId}]});
-		return score;
+		return Scores.findOne({$and: [{testId: options.testId}, {studentId: options.studentId}]}) ? true : false;
 	},
 
 	'cheating': function(scoreId, isCheating) {
