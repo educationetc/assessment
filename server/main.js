@@ -3,7 +3,12 @@ Meteor.startup(function () {
   process.env.MAIL_URL = '';
 });
 
-var key = '1234567890ABCDEFGHJKLMNPQRSTUVWXYZ';
+var key = '1234567890ABCDEFGHJKLMNPQRSTUVWXYZ',
+  students = '';
+
+Meteor.startup(() => {
+  students = JSON.parse(Assets.getText('students.json'));
+});
 
 function generateId(int) {
 	var str = '';
@@ -38,6 +43,10 @@ Meteor.publish('scores', function(testId) {
 });
 
 Meteor.methods({
+	'getStudents': function() {
+		return students;
+	},
+
 	'insertTest': function(options) {
 		Tests.insert({
 			token: generateId(5),

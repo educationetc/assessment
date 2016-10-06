@@ -26,6 +26,11 @@ Users
 }
 ------------ /schemas -----------
 */
+students = '';
+
+Meteor.call('getStudents', function (err, res) {
+	students = res;
+});
 
 Router.route('/about', function() {
 	BlazeLayout.render('app', {content: 'about'});
