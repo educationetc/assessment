@@ -1,4 +1,4 @@
-import { Tests } from '../../mongo/tests.js';
+import { Tests } from '../../mongo/tests.js'; //template for creating a test
 
 /*	create route	*/
 Router.route('/create', function () {
@@ -11,7 +11,7 @@ Router.route('/create', function () {
 });
 
 Template.create.events({
-	'click #add-question'(e) {
+	'click #add-question'(e) { //adds a question when the #add-question button is clicked
 		e.preventDefault();
 
 		var questions = Session.get('questions');
@@ -20,12 +20,12 @@ Template.create.events({
 		Session.set('questions', questions);
 	},
 
-	'click #remove-question'(e) {
+	'click #remove-question'(e) { //removes a question when the #remove-question button is clicked
 		e.preventDefault();
 
 		var questions = Session.get('questions');
 
-		// make sure they cant have 
+		// make sure they cant have 0 questions
 		if(questions.length === 1)
 			return error('You cannot have 0 questions!');
 
@@ -34,7 +34,7 @@ Template.create.events({
 		Session.set('questions', questions);
 	},
 
-	'submit #new-assessment' (e) {
+	'submit #new-assessment' (e) { //creates the new assessment
 		e.preventDefault();
 
 		var answers 	= '',
@@ -67,12 +67,12 @@ Template.create.events({
 });
 
 Template.create.helpers({
-	questions() {
+	questions() { //gets the test questions
 		return Session.get('questions');
 	}
 });
 
-function bubbleNext(answer) {
+function bubbleNext(answer) { //Allows for "bubbling" in questions
 	for (var i = 1; i < Session.get('questions').length + 1; i++)
 		if (!$('input[name="q' + i + '"]:checked').val())
 			return $('input[id="' + answer + i + '"]').prop('checked', true);
@@ -86,7 +86,7 @@ function bubbleNext(answer) {
 }
 
 
-function addListener() {
+function addListener() { //allows you to bubble in an answer using the keyboard
 	$(document).on('keyup', function (e) {
   		if (Router.current().route.getName() === 'create') {
   			if ($("#assessment-name").is(":focus"))

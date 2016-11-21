@@ -4,12 +4,12 @@ import { Scores } from '../../mongo/scores.js';
 var tests;
 
 Router.route('/dashboard', function() {
-	BlazeLayout.render('app', {content: 'spinner'});
+	BlazeLayout.render('app', {content: 'spinner'}); //spinner isn't currently used
 
 	if(!Meteor.user())
-		return BlazeLayout.render('app', {content: '404'});
+		return BlazeLayout.render('app', {content: '404'}); //if not admin, a 404 page
 
-	Meteor.call('getOwnedTests', function(err, res) {
+	Meteor.call('getOwnedTests', function(err, res) { //gets all tests that belong to that teacher
 
 
 		if (err)
@@ -21,7 +21,7 @@ Router.route('/dashboard', function() {
 
 		populate();
 
-		function populate() {
+		function populate() { //a recursive routine that populates the dashboard with student tests
 			if(j === tests.length) 
 				return BlazeLayout.render('app', {content: 'dashboard', tests: tests});
 
@@ -49,7 +49,7 @@ Router.route('/dashboard', function() {
 });
 
 Template.dashboard.helpers({
-	add(int) {
+	add(int) { //adds
 		return int + 1;
 	}
 });

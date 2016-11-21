@@ -1,20 +1,20 @@
 import { Accounts } from 'meteor/accounts-base';
 
-Router.route('/login', function() {
+Router.route('/login', function() { //takes you to login page
 	if(Meteor.user())
 		return Router.go('/dashboard');
 
 	BlazeLayout.render('app', {content: 'login'});
 });
 
-Router.route('/register', function() {
+Router.route('/register', function() { //takes you to register page
 	if(Meteor.user())
 		return Router.go('/dashboard');
 
 	BlazeLayout.render('app', {content: 'register'});
 });
 
-Router.route('/logout', function() {
+Router.route('/logout', function() { //logs out and goes to home page
 	Meteor.logout();
 	
 	success('Logged out successfully.')
@@ -22,7 +22,7 @@ Router.route('/logout', function() {
 });
 
 Template.login.events({
-	'submit #login-form'(e) {
+	'submit #login-form'(e) { //checks the login and, if legit, logs in
 		e.preventDefault();
 
 		var email	 		= $('input[name="email"]').val(),
@@ -39,7 +39,7 @@ Template.login.events({
 });
 
 Template.register.events({
-	'submit #register-form'(e) {
+	'submit #register-form'(e) { //allows a teacher to register and creates an account for them
 		e.preventDefault();
 
 		var email 			= $('input[name="email"]').val(),

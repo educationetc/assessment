@@ -5,7 +5,7 @@ Router.route('/:testId/edit', function() {
 	this.wait(Meteor.subscribe('tests'));
 
 
-	if (this.ready()) {
+	if (this.ready()) { //allows you to edit the test if you are the correct teacher
 		if(!Meteor.user())
 			return BlazeLayout.render('app', {error: '404'});
 
@@ -29,17 +29,17 @@ Router.route('/:testId/edit', function() {
 });
 
 Template.edit.helpers({
-	questions() {
+	questions() { //gets questions
 		return Session.get('questions');
 	},
 
-	check(a, b) {
+	check(a, b) { //checks if a and b are equal
 		return a === b;
 	}
 });
 
 Template.edit.events({
-	'click #add-question'(e) {
+	'click #add-question'(e) { //allows you to add a question
 		e.preventDefault();
 
 		var questions = Session.get('questions');
@@ -48,7 +48,7 @@ Template.edit.events({
 		Session.set('questions', questions);
 	},
 
-	'click #remove-question'(e) {
+	'click #remove-question'(e) { //allows you to remove a question
 		e.preventDefault();
 
 		var questions = Session.get('questions');
@@ -57,7 +57,7 @@ Template.edit.events({
 		Session.set('questions', questions);
 	},
 
-	'submit #edit-assessment' (e) {
+	'submit #edit-assessment' (e) { //submits the edited assessment, checks for any errors
 		e.preventDefault();
 
 		var answers 	= '',

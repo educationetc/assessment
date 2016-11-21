@@ -2,16 +2,16 @@ import { Tests } from '../../mongo/tests.js';
 
 Router.route('/', function () {
 	Meteor.subscribe('tests'); /* don't wait for the subscription because hopefully it will have loaded by the time they click, no need for a spinner */
-	BlazeLayout.render('app', {content: 'home'});
+	BlazeLayout.render('app', {content: 'home'}); // renders home view
 });
 
-Template.home.events({
-	'submit #token-form' (e) {
+Template.home.events({ 
+	'submit #token-form' (e) {//sees whether the token leads to a real test
 		e.preventDefault();
 		checkToken($('input[name="token"]').val());
 	},
 
-	'submit #student-id-form' (e) {
+	'submit #student-id-form' (e) { //after a student puts in their id, assesses whether they can take the test and if so, allows them to
 		e.preventDefault();
 
 		var id = $('input[name="student-id"]').val();
@@ -38,7 +38,7 @@ Template.home.events({
 		})
 	},
 
-	'click #powerschool-btn' (e) {
+	'click #powerschool-btn' (e) { //supposedly this will eventually transmit stuff directly to powerschool
 		Meteor.call('sendEmail',
             'coltranenadler@gmail.com',
             'coltranenadler@gmail.com',
@@ -47,7 +47,7 @@ Template.home.events({
 	}
 });
 
-function checkToken(token) {
+function checkToken(token) {//sees whether the token leads to a real test
 
 	Meteor.call('getTest', token, function(err, res) {
 		

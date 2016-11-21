@@ -6,6 +6,8 @@ var errorImages = [
 
 Template['404'].helpers({
 	loadImg() {
-		return errorImages[Math.round(Math.random() * (errorImages.length - 1))];
+		return errorImages[Math.round(Math.random() * (errorImages.length - 1))]; //picks one of the error images above randomly and loads it.
 	}
 });
+
+/*referenced by dashboard.js, edit.js, and used by 404.html*/

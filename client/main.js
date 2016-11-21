@@ -28,21 +28,21 @@ Users
 */
 students = '';
 
-Meteor.call('getStudents', function (err, res) {
+Meteor.call('getStudents', function (err, res) { //sets the array students to res
 	students = res;
 });
 
-Router.route('/about', function() {
+Router.route('/about', function() { //routes to about page if educationetc.org/about
 	BlazeLayout.render('app', {content: 'about'});
 });
 
-Template.registerHelper('add', (int) => int + 1)
+Template.registerHelper('add', (int) => int + 1) //carries over a couple previous helpers
 Template.registerHelper('session', (key) => Session.get(key));
 Template.registerHelper('from', (time) => {
 	return from(time);
 });
 
-from = function(time) {
+from = function(time) { //figures out how much time has passed in days, hours, minutes, and seconds
 	console.log(time);
 	if(time === 0)
 		return '';
@@ -63,21 +63,21 @@ from = function(time) {
 	return str;
 }
 
-error = function(msg) {
+error = function(msg) { //shows errors
 	$('#error').fadeIn(1000);
 	$('#error').text(msg);
 
 	setTimeout(() => $('#error').fadeOut(1000), 2000);
 }
 
-success = function(msg) {
+success = function(msg) { //shows sucesses
 	$('#success').fadeIn(1000);
 	$('#success').text(msg);
 
 	setTimeout(() => $('#success').fadeOut(1000), 2000);
 }
 
-var errorImages = [
+var errorImages = [ //seems repetitive and unecessary
 	'http://crajun.com/wp-content/uploads/2014/10/morpheus_meme.jpg',
 	'http://s.quickmeme.com/img/a8/a8022006b463b5ed9be5a62f1bdbac43b4f3dbd5c6b3bb44707fe5f5e26635b0.jpg',
 	'http://s2.quickmeme.com/img/65/651187f0b2c21175af34ba007af0653f3e613e1e2b369ccfbf23091fe2ae6eea.jpg'
