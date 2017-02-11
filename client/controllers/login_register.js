@@ -33,6 +33,7 @@ Template.login.events({
 				return error(err);
 
 			success('Logged in successfully.');
+			console.log(Meteor.userId());
 			Router.go('/dashboard');
 		});
 	}

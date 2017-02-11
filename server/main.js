@@ -23,6 +23,8 @@ import { Email } from 'meteor/email';
 import { Meteor } from 'meteor/meteor';
 import { Tests } from '../mongo/tests.js';
 import { Scores } from '../mongo/scores.js';
+import { Classes } from '../mongo/class.js';
+import { Students } from '../mongo/students.js'
 
 Meteor.startup(() => {
   // code to run on server at startup
@@ -43,10 +45,6 @@ Meteor.publish('scores', function(testId) { //find the scores for a given test I
 });
 
 Meteor.methods({
-	'getStudents': function() { //returns the array of students
-		return students;
-	},
-
 	'insertTest': function(options) { //creates a new test
 		Tests.insert({
 			token: generateId(5),
@@ -57,7 +55,20 @@ Meteor.methods({
 			createdAt: Date.now()
 		});
 	},
-
+	'insertClass' : function(options) {
+		Classes.insert({
+			name: options.name,
+			admin: this.userId,
+		});
+	},
+	'insertStudent' : function(options) {
+		Students.insert({
+			lastname: options.lastname,
+			firstname: options.firstname,
+			num: options.num,
+			classroom: options.classroom
+		});
+	},
 	'editTest': function(options) { //updates an edited test
 		Tests.update({
 			_id: options.testId
@@ -104,9 +115,14 @@ Meteor.methods({
 	'getScores': function(testId) { //find all the scores for a specific test
 		return Scores.find({testId: testId}).fetch();
 	},
-
+	'getStudents' : function(classroom) { ///edit this for arrays of classes
+		return Students.find({classroom: classroom}).fetch();
+	},
 	'getOwnedTests': function() { //find all the scores for a specific teacher
 		return Tests.find({admin: this.userId}, {sort: {createdAt: -1}}).fetch();
+	},
+	'getOwnedClasses': function(){
+		return Classes.find({admin: this.userId}, {sort: ["name", "asc"]}).fetch();
 	},
 
 	'hasTaken': function(options) { //sees whether a specific student has taken a specific test

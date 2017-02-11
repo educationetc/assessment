@@ -1,0 +1,40 @@
+<template name="addclass">
+	<div class="container text-center">
+		<br><br><br><br>
+		<h2>Create Class</h2>
+		<form id="new-class">
+			<div class="form-group">
+				<input id="class-name" name="name" class="assessment-input" placeholder="Class Name">
+			</div>
+			<h3>Students</h3>
+			<h4>Add New</h4>
+			<div class="form-group">
+				<input id="lastname" class="assessment-input" placeholder="Last Name">
+				<input id="firstname" class="assessment-input" placeholder="First Name">
+				<input id="id" class="assessment-input" placeholder="Student ID">
+				<br><br>
+				<button class="assessment-button" type="button" id="student-submit">Add Student</button>
+			</div>
+			<h3>Roster</h3>
+			<table class="table table-striped center" style="width:50%">
+				<thead>
+					<th>Student ID</th>
+					<th>Name</th>
+					<th></th>
+				</thead>
+				<tbody>
+					{{#each students}}
+					<tr>
+						<td style="text-align:left">{{ this.num }}</td>
+						<td style="text-align:left">{{ this.lastname }}, {{ this.firstname }}</td>
+						<td><button id="delete">delete</button></td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+			<br><br>
+			<button class="assessment-button" type="submit">Create</button>
+		</form>
+		<br><br><br><br>
+	</div>
+</template>

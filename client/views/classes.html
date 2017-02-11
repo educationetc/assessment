@@ -1,0 +1,26 @@
+<template name="classes">
+	<br><br><br>
+	<div class="container">
+		<h2 style="float: left">My Classes</h2>
+		<a href="/addclass"><button class="assessment-button" style="float: right; margin-top: 15px; background-color: #33cc33; border: 3px solid #009900">Add a Class</button></a>
+		<br><br><br><br>
+		<table class="table table-striped">
+			<thead>
+				<th>Class</th>
+				<th># of Students</th>
+				<th>View</th>
+				<th>Edit</th>
+			</thead>
+			<tbody>
+				{{#each classes}}
+					<tr>
+						<td>{{ this.name }}</td>
+						<td>{{ this.students.length }}</td>
+						<td><a href="/{{ this._id }}/viewclass">view</a></td>
+						<td><a href="/{{ this._id }}/editclass">edit</a></td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</template>
